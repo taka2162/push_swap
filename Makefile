@@ -1,7 +1,7 @@
 NAME 	=	push_swap
 LIBFT	=	libft.a
 LIBPATH	=	./libft/
-SRCS	= 	stack.c push_swap_rotate.c
+SRCS	= 	stack.c swap_and_push.c rotate_and_reverse.c sort_three_nodes.c input_argvs.c
 OBJS 	=	$(SRCS:%.c=%.o)
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror

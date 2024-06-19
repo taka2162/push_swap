@@ -6,16 +6,17 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:45 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/17 16:58:21 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:33:56 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
-#include <stdio.h>
 
 void	initialize_stack(t_stack *a, t_stack *b)
 {
+	a->data = 0;
+	b->data = 0;
 	a->next = a;
 	b->next = b;
 	a->prev = a;
@@ -38,20 +39,6 @@ int	count_stack_size(t_stack *stack)
 	return (size);
 }
 
-void	add_node(t_stack *head, long data)
-{
-	t_stack	*new;
-
-	new = (t_stack *)malloc(sizeof(t_stack));
-	if (new == NULL)
-		exit(1);
-	new->data = data;
-	new->next = head->next;
-	new->prev = head->prev;
-	head->next = new;
-	head->prev = new;
-}
-
 void	clear_stack(t_stack *stack)
 {
 	t_stack	*head;
@@ -70,21 +57,26 @@ void	clear_stack(t_stack *stack)
 	head = NULL;
 }
 
-void	__print_stack(t_stack *stack)
+void	__print_stack(t_stack *stack, int color)
 {
 	t_stack	*head;
 
 	head = stack;
 	stack = stack->next;
+	if (color == 0)
+		printf("\x1b[35m");
+	else
+		printf("\x1b[36m");
 	while (stack != head)
 	{
 		printf("%ld ", stack->data);
 		stack = stack->next;
 	}
+	printf("\x1b[m");
 	printf("\n");
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
@@ -96,17 +88,24 @@ int	main(void)
 	if (b == NULL)
 		return (1);
 	initialize_stack(a, b);
-	add_node(a, 7);
-	add_node(b, 8);
-	add_node(a, 90);
-	add_node(b, 28);
-	add_node(a, 12);
-	__print_stack(a);
-	__print_stack(b);
-	// pa(a, b);
-	sb(b);
-	__print_stack(a);
-	__print_stack(b);
+	input_argvs(a, argc, argv);
+	__print_stack(a, 0);
+	__print_stack(b, 1);
+	//pa(a, b);
+	//pb(a, b);
+	// swap(a, A, TRUE);
+	// swap(b, B, TRUE);
+	// ss(a, b);
+	// rotate(a, A, TRUE);
+	// rotate(b, B, TRUE);
+	// r_rotate(a, A, TRUE);
+	// r_rotate(b, B, TRUE);
+	// rrr(a, b);
+	printf("--------------------------------------------------------|\n");
+	sort_three_nodes(a);
+	printf("--------------------------------------------------------|\n");
+	__print_stack(a, 0);
+	__print_stack(b, 1);
 	printf("a_size = %d b_size = %d\n", count_stack_size(a), count_stack_size(b));
 	clear_stack(a);
 	clear_stack(b);

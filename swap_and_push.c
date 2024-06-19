@@ -1,59 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_rotate.c                                 :+:      :+:    :+:   */
+/*   swap_and_push.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:00:11 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/17 17:00:09 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:28:12 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void	sa(t_stack *a)
+void	swap(t_stack *stack, int stack_type, int show_motion)
 {
 	t_stack	*first;
 	t_stack	*second;
 	t_stack	*third;
 	
-	if (count_stack_size(a) < 2)
+	if (count_stack_size(stack) < 2)
 		return ;
-	first = a->next;
+	first = stack->next;
 	second = first->next;
 	third = second->next;
-	a->next = second;
+	stack->next = second;
 	first->next = third;
 	first->prev = second;
 	second->next = first;
-	second->prev = a;
+	second->prev = stack;
 	third->prev = first;
-	ft_putstr_fd("sa\n", 1);
+	if (show_motion == FALSE)
+		return ;
+	if (stack_type == A)
+		ft_putstr_fd("sa\n", 1);
+	else if (stack_type == B)
+		ft_putstr_fd("sb\n", 1);
 }
 
-void	sb(t_stack *b)
+void	ss(t_stack *a, t_stack *b)
 {
-	t_stack	*first;
-	t_stack	*second;
-	t_stack	*third;
-	
-	if (count_stack_size(b) < 2)
-		return ;
-	first = b->next;
-	second = first->next;
-	third = second->next;
-	b->next = second;
-	first->next = third;
-	first->prev = second;
-	second->next = first;
-	second->prev = b;
-	third->prev = first;
-	ft_putstr_fd("sb\n", 1);
+	swap(a, A, FALSE);
+	swap(b, B, FALSE);
+	ft_putstr_fd("ss\n", 1);
 }
-
-
 
 void	pa(t_stack *a, t_stack *b)
 {
