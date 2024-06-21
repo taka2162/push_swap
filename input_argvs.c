@@ -22,6 +22,7 @@ void	add_node(t_stack *head, long data)
 	if (new == NULL)
 		exit(1);
 	new->data = data;
+	new->group = 0;
 	first = head->next;
 	new->next = head->next;
 	new->prev = head;
@@ -33,10 +34,10 @@ void	input_argvs(t_stack *a, int argc, char **argv)
 {
 	int	i;
 
-	i = 1;
-	while (i < argc)
+	i = argc - 1;
+	while (0 < i)
 	{
 		add_node(a, (long)ft_atoi(argv[i]));
-		i++;
+		i--;
 	}
 }

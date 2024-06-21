@@ -17,18 +17,21 @@
  #include <unistd.h>
  #include <stdlib.h>
  #include <stdio.h>
+ #include <limits.h>
 
  #define TRUE 1
  #define FALSE 0
  #define A 3
  #define B 4
- #define both 5
+ #define STACK 5
+ #define GROUP 6
  
 typedef struct s_stack
 {
 	struct s_stack	*prev;
 	struct s_stack	*next;
 	long			data;
+	int				group;
 }	t_stack;
 
 void	swap(t_stack *a, int stack_type, int show_motion);
@@ -42,9 +45,14 @@ void	rrr(t_stack *a, t_stack *b);
 void	sort_three_nodes(t_stack *a);
 
 
+long	get_median(t_stack *a);
+void	quick_sort(t_stack *a, t_stack *b);
+
 void	input_argvs(t_stack *a, int argc, char **argv);
 
-int	count_stack_size(t_stack *stack);
+int	count_stack_size(t_stack *stack, int sign);
 
+
+void	__print_stack(t_stack *stack, int color);
  
  #endif

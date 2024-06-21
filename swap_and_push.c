@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft/libft.h"
+#include "libft/libft.h" 
 
 void	swap(t_stack *stack, int stack_type, int show_motion)
 {
@@ -19,7 +19,7 @@ void	swap(t_stack *stack, int stack_type, int show_motion)
 	t_stack	*second;
 	t_stack	*third;
 	
-	if (count_stack_size(stack) < 2)
+	if (count_stack_size(stack, STACK) < 2)
 		return ;
 	first = stack->next;
 	second = first->next;
@@ -49,7 +49,7 @@ void	pa(t_stack *a, t_stack *b)
 {
 	t_stack	*target;
 	
-	if (count_stack_size(b) == 0)
+	if (count_stack_size(b, STACK) == 0)
 		return ;
 	target = b->next;
 	b->next = target->next;
@@ -64,7 +64,7 @@ void	pb(t_stack *a, t_stack *b)
 {
 	t_stack	*target;
 	
-	if (count_stack_size(a) == 0)
+	if (count_stack_size(a, STACK) == 0)
 		return ;
 	target = a->next;
 	a->next = target->next;
