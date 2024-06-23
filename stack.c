@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:45 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/19 17:33:56 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/06/23 17:11:51 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	count_stack_size(t_stack *stack, int sign)
 	group = stack->group;
 	while (stack != head)
 	{
-		size++;
 		if (stack->group != group && sign == GROUP)
 			break ;
+		size++;
 		stack = stack->next;
 	}
 	return (size);
@@ -63,7 +63,7 @@ void	clear_stack(t_stack *stack)
 	head = NULL;
 }
 
-void	__print_stack(t_stack *stack, int color)
+void	__print_stack(t_stack *stack)
 {
 	t_stack	*head;
 
@@ -71,7 +71,7 @@ void	__print_stack(t_stack *stack, int color)
 	stack = stack->next;
 	while (stack != head)
 	{
-		if (color == A)
+		if (head->group == A)
 			printf("\x1b[35m");
 		else
 			printf("\x1b[36m");
@@ -98,24 +98,32 @@ int	main(int argc, char **argv)
 		return (1);
 	initialize_stack(a, b);
 	input_argvs(a, argc, argv);
-	__print_stack(a, A);
-	__print_stack(b, B);
-	//pa(a, b);
-	//pb(a, b);
-	// swap(a, A, TRUE);
-	// swap(b, B, TRUE);
+	__print_stack(a);
+	__print_stack(b);
+	// push(a, b);
+	// push(a, b);
+	// push(a, b);
+	// push(a, b);
+	// push(b, a);
+	// push(b, a);
+	// __print_stack(a);
+	// __print_stack(b);
+	// push(b, a);
+	// push(b, a);
+	// push(b, a);
+	// swap(a, TRUE);
+	// swap(b, TRUE);
 	// ss(a, b);
-	// rotate(a, A, TRUE);
-	// rotate(b, B, TRUE);
-	// r_rotate(a, A, TRUE);
-	// r_rotate(b, B, TRUE);
+	// rotate(a, TRUE);
+	// rotate(b, TRUE);
+	// r_rotate(a, TRUE);
+	// r_rotate(b, TRUE);
 	// rrr(a, b);
-	printf("median = %ld\n", get_median(a));
 	printf("--------------------------------------------------------|\n");
 	quick_sort(a, b);
 	printf("--------------------------------------------------------|\n");
-	__print_stack(a, A);
-	__print_stack(b, B);
+	__print_stack(a);
+	__print_stack(b);
 	printf("a_size = %d b_size = %d\n", count_stack_size(a, STACK), count_stack_size(b, STACK));
 	clear_stack(a);
 	clear_stack(b);
