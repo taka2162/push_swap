@@ -12,180 +12,122 @@
 
 #include "push_swap.h"
 
-void	quick_sort(t_stack *light, t_stack *dark)
+void	divide_group(t_stack *light, t_stack *dark, int group, int pos)
 {
 	t_stack	*target;
-	int		size;
 	int		direction;
 	long	median;
-	int		group;
+	int		size;
 
+	target = light->next;
+	direction = 0;
+	median = get_median(light, direction);
+	// if (pos == B)
+	// 	group = light->next->group;
+	size = count_stack_size(light, GROUP);
+	printf("{{median = %ld  group = %d  target = %ld}}\n", median, group, target->data);
+	while (size-- > 0)
+	{
+		// target->group = group + 1;
+		if (target->data < median && pos == A)
+		{
+			light->next->group = group + 1;
+			push(light, dark);
+		}
+		else if (target->data > median && pos == B)
+		{
+			light->next->group = group + 1;
+			push(light, dark);
+		}
+		else
+		{
+			rotate(light, TRUE);
+		}
+		if (direction == 0)
+			target = light->next;
+		// printf("direction = %d\n", direction);
+		// if (target->group != group)
+		// {
+		// 	printf("\x1b[31mbreak\n\x1b[0m");
+		// 	break ;
+		// }
+	}
+}
 
-	// printf("group size = %d\n", count_stack_size(light, GROUP));
-	// printf("group = %d\n", light->next->group);
+void	quick_sort(t_stack *light, t_stack *dark, int group, int pos)
+{
+	int	size;
+	int	flag;
+
+	printf("\x1b[33mbefore____________________\n");
 	__print_stack(light);
 	__print_stack(dark);
-	// if (count_stack_size(light, STACK) < 3)
-	// {
-	// 	if (count_stack_size(light, STACK) == 2)
-	// 	{
-	// 		if (light->next->data < light->next->next->data)
-	// 			swap(light, TRUE);
-	// 		push(light, dark);
-	// 		push(light, dark);
-	// 	}
-	// 	else
-	// 		push(light, dark);
-	// 	return ;
-	// }
-	if (count_stack_size(light, GROUP) == 0)
-	{
-		return ;
-	}
-	else if (count_stack_size(light, GROUP) == 1)
-	{
-		push(light, dark);
-		quick_sort(light, dark);
-		return ;
-	}
-	else if (count_stack_size(light , GROUP) == 2)
+		size = count_stack_size(light, GROUP);
+	printf("\x1b[33msize = %d\n", size);
+	printf("__________________________|\x1b[m\n");
+
+	flag = FALSE;
+	if (size == 2 & pos == B)
 	{
 		if (light->next->data < light->next->next->data)
 			swap(light, TRUE);
 		push(light, dark);
 		push(light, dark);
-		quick_sort(light, dark);
-		return ;
 	}
-	
-	if (dark->next->group - 1 == light->next->group)
+	else if (size == 2 && pos == A)
 	{
-		target = light->next;
-		direction = 0;
+		if (light->next->data > light->next->next->data)
+			swap(light, TRUE);
+	}
+	else if (size == 1)
+	{
+		push(light, dark);
 	}
 	else
 	{
-		target = light->prev;
-		direction = 1;
+		divide_group(light, dark, group, pos);
+		flag = TRUE;
 	}
-	size = 0;
-	median = get_median(target, direction);
-	group = target->group;
-	printf("median = %ld\n", median);
+
+	printf("\x1b[32mafter____________________\n");
+	__print_stack(light);
+	__print_stack(dark);
 	size = count_stack_size(light, GROUP);
-	while (0 < size && target->group == group)
+	printf("\x1b[32msize = %d\n", size);
+	printf("__________________________|\x1b[m\n");
+
+	if (light->next == light || dark->next == dark)
+		return ;
+
+	//範囲を指定して再帰
+	if (size > 2 && pos == A)
+		quick_sort(light, dark, group + 1, pos);
+	// if (size > 2 && pos == B)
+	// 	quick_sort(light, dark, group, pos);
+	else if (size == 2 && pos == A)
 	{
-		if (direction == 1)
-			r_rotate(light, TRUE);
-		printf("target = %ld\n",  target->data);
-		if (target->data < median && light->group == A)
-			push(light, dark);
-		else if (target->data > median && light->group == B)
-			push(light, dark);
-		else
-		{
-			target->group = group + 1;
-			if (direction == 0)
-				rotate(light, TRUE);
-		}
-		size--;
-		if (direction == 0)
-			target = light->next;
-		else
-			target = light->prev;
-		// printf("light = %d   ", light->group);
-		// printf("size = %d target = %ld group = %d\n", size, target->data, target->group);
+		if (light->next->data > light->next->next->data)
+			swap(light, TRUE);
+		quick_sort(dark, light, group, B);
 	}
-
-	if (light->group == A)
+	else if (pos == B)
 	{
-		if (count_stack_size(light, GROUP) > 2)
-		{
-			// __print_stack(light);
-			// __print_stack(dark);
-			quick_sort(light, dark);
-		}
+		if (flag == TRUE)
+			quick_sort(dark, light, group, A);
 		else
-		{
-			if (light->next->data > light->next->next->data)
-				swap(light, TRUE);
-			// __print_stack(light);
-			// __print_stack(dark);
-			quick_sort(dark, light);
-		}
+			quick_sort(light, dark, group, pos);
+		// if (size == 2 && pos == B)
+		// {
+		// 	// if (light->next->data < light->next->next->data)
+		// 	// 	swap(light, TRUE);
+		// 	// push(light, dark);
+		// 	// push(light, dark);
+		// 	quick_sort(light, dark, group, pos);
+		// }
+		// else if (size == 1)
+		// {
+		// 	// push(light, dark);
+		// 	quick_sort(light, dark, group, pos);
+		// }
 	}
-	else if (light->group == B)
-	{
-		if (count_stack_size(dark, GROUP) > 2)
-		{
-			quick_sort(dark, light);
-		}
-		else if (count_stack_size(dark, GROUP) == 2)
-		{
-			if (dark->next->data > dark->next->next->data)
-				swap(dark, TRUE);
-			quick_sort(light, dark);
-		}
-	}
-
-	return ;
-
-
-	// if (light->group == A)
-	// {
-	// 	printf("A, ");
-	// 	if (count_stack_size(light, GROUP) > 3)
-	// 	{
-	// 		printf(">3\n");
-	// 		quick_sort(light, dark);
-	// 	}
-	// 	else if (count_stack_size(light, GROUP) == 3)
-	// 	{
-	// 		sort_three_nodes(light);
-	// 		push(dark, light);
-	// 		push(dark, light);
-	// 		if (light->next->data > light->next->next->data)
-	// 			swap(light, TRUE);
-	// 		printf("3\n");
-	// 		quick_sort(dark, light);
-	// 	}
-	// 	else if (count_stack_size(light, GROUP) == 2)
-	// 	{
-	// 		if (light->next->data > light->next->next->data)
-	// 		{
-	// 			swap(light, TRUE);
-	// 		}
-	// 		printf("2, \n");
-	// 		quick_sort(dark, light);
-	// 	}
-	// 	else
-	// 	{
-	// 		printf("Error---A\n");
-	// 		return ;
-	// 	}
-	// }
-	// else
-	// {
-	// 	printf("B, ");
-	// 	if (count_stack_size(dark, GROUP) >= 3)
-	// 	{
-	// 		quick_sort(dark, light);
-	// 	}
-	// 	else if (count_stack_size(dark, GROUP) == 2)
-	// 	{
-	// 		if (dark->next->data > light->next->next->data)
-	// 		{
-	// 			swap(light, TRUE);
-	// 		}
-	// 		push(light, dark);
-	// 		push(light, dark);
-	// 		printf("2\n");
-	// 		quick_sort(dark, light);
-	// 	}
-	// 	else
-	// 	{
-	// 		printf("Error---B\n");
-	// 		return ;
-	// 	}
-	// }
 }

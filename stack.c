@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:45 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/23 17:11:51 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/06/24 16:59:04 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	main(int argc, char **argv)
 	// r_rotate(b, TRUE);
 	// rrr(a, b);
 	printf("--------------------------------------------------------|\n");
-	quick_sort(a, b);
+	quick_sort(a, b, 0, A);
 	printf("--------------------------------------------------------|\n");
 	__print_stack(a);
 	__print_stack(b);
@@ -130,7 +130,7 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-__attribute__((destructor))
-static void destructor() {
-   system("leaks -q push_swap");
-}
+// __attribute__((destructor))
+// static void destructor() {
+//    system("leaks -q push_swap");
+// }ss
