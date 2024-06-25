@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:56 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/24 14:19:09 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/06/25 16:04:43 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	quick_sort(t_stack *light, t_stack *dark, int group, int pos);
 
 void	input_argvs(t_stack *a, int argc, char **argv);
 
-int	count_stack_size(t_stack *stack, int sign);
+int	count_stack_size(t_stack *stack, int sign, int direction);
 
 
 void	__print_stack(t_stack *stack);

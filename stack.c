@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:45 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/24 16:59:04 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/06/25 16:05:14 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	initialize_stack(t_stack *a, t_stack *b)
 	b->prev = b;
 }
 
-int	count_stack_size(t_stack *stack, int sign)
+int	count_stack_size(t_stack *stack, int sign, int direction)
 {
 	int		size;
 	t_stack	*head;
@@ -33,14 +33,20 @@ int	count_stack_size(t_stack *stack, int sign)
 
 	size = 0;
 	head = stack;
-	stack = stack->next;
+	if (direction == 0)
+		stack = stack->next;
+	else
+		stack = stack->prev;
 	group = stack->group;
 	while (stack != head)
 	{
 		if (stack->group != group && sign == GROUP)
 			break ;
 		size++;
-		stack = stack->next;
+		if (direction == 0)
+			stack = stack->next;
+		else
+			stack = stack->prev;
 	}
 	return (size);
 }
@@ -124,7 +130,7 @@ int	main(int argc, char **argv)
 	printf("--------------------------------------------------------|\n");
 	__print_stack(a);
 	__print_stack(b);
-	printf("a_size = %d b_size = %d\n", count_stack_size(a, STACK), count_stack_size(b, STACK));
+	printf("a_size = %d b_size = %d\n", count_stack_size(a, STACK, 0), count_stack_size(b, STACK, 0));
 	clear_stack(a);
 	clear_stack(b);
 	return (0);
