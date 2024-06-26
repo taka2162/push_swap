@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:56 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/25 16:04:43 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/06/26 18:02:02 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	r_rotate(t_stack *stack, int show_motion);
 void	rrr(t_stack *a, t_stack *b);
 void	sort_three_nodes(t_stack *a);
 
-
-long	get_median(t_stack *a, int direction);
+long	get_median_expect(t_stack *stack, int direction);
+long	get_median(t_stack *stack, int direction);
 void	quick_sort(t_stack *light, t_stack *dark, int group, int pos);
 
 void	input_argvs(t_stack *a, int argc, char **argv);

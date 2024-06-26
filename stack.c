@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:45 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/25 16:05:14 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/06/26 17:57:55 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ int	main(int argc, char **argv)
 		return (1);
 	initialize_stack(a, b);
 	input_argvs(a, argc, argv);
-	__print_stack(a);
-	__print_stack(b);
+	// __print_stack(a);
+	// __print_stack(b);
 	// push(a, b);
 	// push(a, b);
 	// push(a, b);
@@ -125,18 +125,19 @@ int	main(int argc, char **argv)
 	// r_rotate(a, TRUE);
 	// r_rotate(b, TRUE);
 	// rrr(a, b);
-	printf("--------------------------------------------------------|\n");
+	// printf("pivot = %ld\n", get_median(a, 0));
+	// printf("--------------------------------------------------------|\n");
 	quick_sort(a, b, 0, A);
-	printf("--------------------------------------------------------|\n");
-	__print_stack(a);
-	__print_stack(b);
-	printf("a_size = %d b_size = %d\n", count_stack_size(a, STACK, 0), count_stack_size(b, STACK, 0));
+	// printf("--------------------------------------------------------|\n");
+	// __print_stack(a);
+	// __print_stack(b);
+	// printf("a_size = %d b_size = %d\n", count_stack_size(a, STACK, 0), count_stack_size(b, STACK, 0));
 	clear_stack(a);
 	clear_stack(b);
 	return (0);
 }
 
-// __attribute__((destructor))
-// static void destructor() {
-//    system("leaks -q push_swap");
-// }ss
+__attribute__((destructor))
+static void destructor() {
+   system("leaks -q push_swap");
+}

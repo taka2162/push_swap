@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:28:22 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/23 14:54:59 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/06/26 16:00:00 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	rotate(t_stack *stack, int show_motion)
 	t_stack	*last;
 	t_stack	*second;
 
+	if (stack->next->next == stack)
+		return ;
 	first = stack->next;
 	last = stack->prev;
 	second = first->next;
@@ -49,6 +51,8 @@ void	r_rotate(t_stack *stack, int show_motion)
 	t_stack	*last;
 	t_stack	*l_second;
 
+	if (stack->next->next == stack)
+		return ;
 	first = stack->next;
 	last = stack->prev;
 	l_second = last->prev;
