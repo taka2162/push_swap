@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:45 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/26 17:57:55 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/06/27 18:30:25 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,14 @@ int	count_stack_size(t_stack *stack, int sign, int direction)
 
 	size = 0;
 	head = stack;
-	if (direction == 0)
-		stack = stack->next;
-	else
-		stack = stack->prev;
+	stack = set_next_node(stack, direction);
 	group = stack->group;
 	while (stack != head)
 	{
 		if (stack->group != group && sign == GROUP)
 			break ;
 		size++;
-		if (direction == 0)
-			stack = stack->next;
-		else
-			stack = stack->prev;
+		stack = set_next_node(stack, direction);
 	}
 	return (size);
 }
@@ -127,7 +121,7 @@ int	main(int argc, char **argv)
 	// rrr(a, b);
 	// printf("pivot = %ld\n", get_median(a, 0));
 	// printf("--------------------------------------------------------|\n");
-	quick_sort(a, b, 0, A);
+	quick_sort(a, b, 0);
 	// printf("--------------------------------------------------------|\n");
 	// __print_stack(a);
 	// __print_stack(b);

@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:56 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/26 18:02:02 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/06/27 18:24:10 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
  #define TRUE 1
  #define FALSE 0
+ #define CW 3
+ #define CCW -3
  #define A -1
  #define B -2
  #define STACK 5
@@ -45,8 +47,12 @@ void	rrr(t_stack *a, t_stack *b);
 void	sort_three_nodes(t_stack *a);
 
 long	get_median_expect(t_stack *stack, int direction);
+
+t_stack	*set_next_node(t_stack *stack, int direction);
+
+void	insertion_sort(t_stack *light, t_stack *dark, int direction);
 long	get_median(t_stack *stack, int direction);
-void	quick_sort(t_stack *light, t_stack *dark, int group, int pos);
+void	quick_sort(t_stack *light, t_stack *dark, int group);
 
 void	input_argvs(t_stack *a, int argc, char **argv);
 
