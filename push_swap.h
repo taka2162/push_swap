@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:56 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/27 18:24:10 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/01 17:19:01 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ long	get_median_expect(t_stack *stack, int direction);
 
 t_stack	*set_next_node(t_stack *stack, int direction);
 
-void	insertion_sort(t_stack *light, t_stack *dark, int direction);
+int		insertion_sort(t_stack *light, t_stack *dark, int group, int direction);
 long	get_median(t_stack *stack, int direction);
 void	quick_sort(t_stack *light, t_stack *dark, int group);
 
 void	input_argvs(t_stack *a, int argc, char **argv);
 
-int	count_stack_size(t_stack *stack, int sign, int direction);
+int		count_stack_size(t_stack *stack, int sign, int direction);
+int		count_group_size(t_stack *light, int direction);
 
 
 void	__print_stack(t_stack *stack);

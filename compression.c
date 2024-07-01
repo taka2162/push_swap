@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 17:55:15 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/27 17:10:51 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/01 18:07:03 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,6 @@ t_stack	*set_next_node(t_stack *stack, int direction)
 		return (stack->prev);
 }
 
-// long	get_min(t_stack *stack, int direction)
-// {
-// 	long	min;
-// 	int		group;
-	
-// 	min = LONG_MAX;
-// 	stack = set_next_node(stack, direction);
-// 	group = stack->group;
-// 	while (stack->group == group)
-// 	{
-// 		if (stack->data < min)
-// 			min = stack->data;
-// 		stack = set_next_node(stack, direction);
-// 	}
-// 	return (min);
-// }
 
 long	get_median(t_stack *stack, int direction)
 {

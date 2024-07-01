@@ -28,7 +28,7 @@ void	push_to_dark(t_stack **light, t_stack *dark, int group, int direction)
 	push(*light, dark);
 }
 
-void	divide_group(t_stack *light, t_stack *dark, int group, int direction)
+int	divide_group(t_stack *light, t_stack *dark, int group, int direction)
 {
 	t_stack	*target;
 	long	median;
@@ -37,7 +37,8 @@ void	divide_group(t_stack *light, t_stack *dark, int group, int direction)
 	target = set_next_node(light, direction);
 	median = get_median(light, direction);
 	// printf("expect -> %ld median = %ld\n", get_median_expect(light, direction), median);
-	size = count_stack_size(light, GROUP, direction);
+	size = count_group_size(light, direction);
+	// size = count_stack_size(light, GROUP, direction);
 	// printf("{{direction = %d  median = %ld  group = %d  target = %ld}}\n", direction, median, group, target->data);
 	while (size-- > 0)
 	{
@@ -74,10 +75,12 @@ void	divide_group(t_stack *light, t_stack *dark, int group, int direction)
 		}
 		target = set_next_node(light, direction);
 	}
+	return (TRUE);
 }
 
-void	sort_one_or_two(t_stack *light, t_stack *dark, int size, int direction)
+int	sort_one_or_two(t_stack *light, t_stack *dark, int size, int direction)
 {
+	// printf("sort_one_or_two\n");
 	if (direction == CCW)
 	{
 		r_rotate(light, TRUE);
@@ -95,6 +98,7 @@ void	sort_one_or_two(t_stack *light, t_stack *dark, int size, int direction)
 		if (2 <= size)
 			push(light, dark);
 	}
+	return (FALSE);
 }
 
 // void	sort_three(t_stack *light, t_stack *dark, int direction)
@@ -144,28 +148,29 @@ void	quick_sort(t_stack *light, t_stack *dark, int group)
 	// if (group > 8)
 	// 	return ;
 
-	size = count_stack_size(light, GROUP, direction);
+	size = count_group_size(light, direction);
+	// // size = count_stack_size(light, GROUP, direction);
 	// printf("\x1b[33mbefore____________________\n");
 	// __print_stack(light);
 	// __print_stack(dark);
 	// printf("\x1b[33msize = %d\n", size);
 	// printf("__________________________|\x1b[m\n");
 
-	flag = FALSE;
 	if (size <= 2)
-		sort_one_or_two(light, dark, size, direction);
-	else if (size <= 10 && light->group == B)
-		insertion_sort(light, dark, direction);
-	else
 	{
-		divide_group(light, dark, group, direction);
-		flag = TRUE;
+		flag = sort_one_or_two(light, dark, size, direction);
 	}
+	else if (size <= 9)
+		flag = insertion_sort(light, dark, group, direction);
+	else
+		flag = divide_group(light, dark, group, direction);
 
-	size = count_stack_size(light, GROUP, direction);
+	size = count_group_size(light, direction);
+	// // size = count_stack_size(light, GROUP, direction);
 	// printf("\x1b[32mafter____________________\n");
 	// __print_stack(light);
 	// __print_stack(dark);
+	// printf("flag = %d\n", flag);
 	// printf("\x1b[32msize = %d\n", size);
 	// printf("__________________________|\x1b[m\n");
 
