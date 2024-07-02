@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:00:11 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/25 16:06:34 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/02 15:28:18 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	swap(t_stack *stack, int show_motion)
 	t_stack	*second;
 	t_stack	*third;
 	
-	if (count_stack_size(stack, STACK, 0) < 2)
+	if (count_stack_size(stack) < 2)
 		return ;
 	first = stack->next;
 	second = first->next;
@@ -51,7 +51,7 @@ void	push(t_stack *throw, t_stack *catch)
 	t_stack	*second;
 	t_stack	*c_next;
 	
-	if (count_stack_size(throw, STACK, 0) == 0)
+	if (count_stack_size(throw) == 0)
 		return ;
 	target = throw->next;
 	second = target->next;

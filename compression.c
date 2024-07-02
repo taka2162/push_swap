@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 17:55:15 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/01 18:07:03 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/02 15:23:44 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,8 @@ long	get_median(t_stack *stack, int direction)
 	t_stack	*head;
 
 	head = stack;
-	len_to_median = count_stack_size(stack, GROUP, direction) / 2;
-	// if (count_stack_size(stack, GROUP, direction) % 2 == 1)
-		len_to_median += 1;
+	len_to_median = count_group_size(stack, direction) / 2;
+	len_to_median += 1;
 	// printf("len_to_median= %d\n", len_to_median);
 	group = set_next_node(stack, direction)->group;
 	// printf("\x1b[32mgroup = %d  stack->group = %d\n", group, stack->next->group);
