@@ -36,6 +36,12 @@ typedef struct s_stack
 	int				group;
 }	t_stack;
 
+typedef struct s_pos
+{
+	int a;
+	int b;
+}	t_pos;
+
 void	swap(t_stack *stack, int show_motion);
 void	ss(t_stack *a, t_stack *b);
 void	pa(t_stack *a, t_stack *b);
@@ -50,6 +56,7 @@ long	get_median_expect(t_stack *stack, int direction);
 
 t_stack	*set_next_node(t_stack *stack, int direction);
 
+void	insertion_sort(t_stack *light, t_stack *dark, int group);
 int		extreme_sort(t_stack *light, t_stack *dark, int group, int direction);
 long	get_median(t_stack *stack, int direction);
 void	quick_sort(t_stack *light, t_stack *dark, int group);

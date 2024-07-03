@@ -12,6 +12,14 @@
 
 #include "push_swap.h"
 
+t_stack	*set_next_node(t_stack *stack, int direction)
+{	
+	if (direction == CW)
+		return (stack->next);
+	else
+		return (stack->prev);
+}
+
 int	set_direction(t_stack *light)
 {
 	if (light->next->group >= light->prev->group)

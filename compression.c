@@ -44,15 +44,6 @@ long	get_median_expect(t_stack *stack, int direction)
 	return ((max + min) / 2);
 }
 
-t_stack	*set_next_node(t_stack *stack, int direction)
-{	
-	if (direction == CW)
-		return (stack->next);
-	else
-		return (stack->prev);
-}
-
-
 long	get_median(t_stack *stack, int direction)
 {
 	long	pivot;
