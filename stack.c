@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:45 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/02 16:25:43 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/04 18:09:32 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,8 @@ int	main(int argc, char **argv)
 	// printf("--------------------------------------------------------|\n");
 	quick_sort(a, b, 0);
 	// printf("--------------------------------------------------------|\n");
-	__print_stack(a);
-	__print_stack(b);
+	// __print_stack(a);
+	// __print_stack(b);
 	// printf("a_size = %d b_size = %d\n", count_stack_size(a), count_stack_size(b));
 	clear_stack(a);
 	clear_stack(b);
