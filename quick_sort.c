@@ -149,9 +149,9 @@ void	quick_sort(t_stack *light, t_stack *dark, int group)
 	flag = FALSE;
 	if (size <= 2)
 		sort_one_or_two(light, dark, size, direction);
-	else if (size <= 9 && light->group == B)
+	else if (size <= 9)
 		flag = extreme_sort(light, dark, group, direction);
-	else if (size <= 99 && light->group == A)
+	else if (size <= 50 && light->group == A)
 	{
 		// printf("zzzinsertion_sortzzz\n");
 		insertion_sort(light, dark, group);

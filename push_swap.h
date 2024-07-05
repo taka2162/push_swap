@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:56 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/02 16:07:20 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/05 15:49:58 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ void	rrr(t_stack *a, t_stack *b);
 void	sort_three_nodes(t_stack *a);
 
 long	get_median_expect(t_stack *stack, int direction);
+
+long	get_min(t_stack *light);
+long	get_max(t_stack *light);
 
 t_stack	*set_next_node(t_stack *stack, int direction);
 
