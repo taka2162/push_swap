@@ -46,7 +46,7 @@ void	divide_group(t_stack *light, t_stack *dark, int group, int direction)
 			// }
 			// push(light, dark);
 		}
-		else if (target->data > median && light->group == B)
+		else if (target->data >= median && light->group == B)
 		{
 			push_to_dark(&light, dark, group, direction);
 			// if (direction == 0)
@@ -151,7 +151,7 @@ void	quick_sort(t_stack *light, t_stack *dark, int group)
 		sort_one_or_two(light, dark, size, direction);
 	else if (size <= 9)
 		flag = extreme_sort(light, dark, group, direction);
-	else if (size <= 50 && light->group == A)
+	else if (size <= 365 && light->group == A)
 	{
 		// printf("zzzinsertion_sortzzz\n");
 		insertion_sort(light, dark, group);
