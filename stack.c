@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:45 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/05 16:51:17 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/10 16:34:02 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,6 @@ int	count_stack_size(t_stack *stack)
 	}
 	return (size);
 }
-
-// int	count_stack_size(t_stack *stack, int sign, int direction)
-// {
-// 	int		size;
-// 	t_stack	*head;
-// 	int		group;
-
-// 	size = 0;
-// 	head = stack;
-// 	stack = set_next_node(stack, direction);
-// 	group = stack->group;
-// 	while (stack != head)
-// 	{
-// 		if (stack->group != group && sign == GROUP)
-// 			break ;
-// 		size++;
-// 		stack = set_next_node(stack, direction);
-// 	}
-// 	return (size);
-// }
 
 int	count_group_size(t_stack *light, int direction)
 {
@@ -138,34 +118,9 @@ int	main(int argc, char **argv)
 		return (1);
 	initialize_stack(a, b);
 	input_argvs(a, argc, argv);
-	// __print_stack(a);
-	// __print_stack(b);
-	// push(a, b);
-	// push(a, b);
-	// push(a, b);
-	// push(a, b);
-	// push(b, a);
-	// push(b, a);
-	// __print_stack(a);
-	// __print_stack(b);
-	// push(b, a);
-	// push(b, a);
-	// push(b, a);
-	// swap(a, TRUE);
-	// swap(b, TRUE);
-	// ss(a, b);
-	// rotate(a, TRUE);
-	// rotate(b, TRUE);
-	// r_rotate(a, TRUE);
-	// r_rotate(b, TRUE);
-	// rrr(a, b);
-	// printf("pivot = %ld\n", get_median(a, 0));
-	// printf("--------------------------------------------------------|\n");
 	quick_sort(a, b, 0);
-	// printf("--------------------------------------------------------|\n");
-	//__print_stack(a);
-	//__print_stack(b);
-	// printf("a_size = %d b_size = %d\n", count_stack_size(a), count_stack_size(b));
+	__print_stack(a);
+	__print_stack(b);
 	clear_stack(a);
 	clear_stack(b);
 	return (0);

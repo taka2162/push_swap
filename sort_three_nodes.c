@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:33:35 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/27 16:15:16 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/10 17:01:55 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	sort_three_nodes(t_stack *stack)
 		r_rotate(stack, TRUE);
 	else if (second > first && second > third &&third > first)
 	{
-			r_rotate(stack, TRUE);
-			swap(stack, TRUE);
+		r_rotate(stack, TRUE);
+		swap(stack, TRUE);
 	}
 }

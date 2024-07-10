@@ -12,57 +12,6 @@
 
 #include "push_swap.h"
 
-
-long	get_min(t_stack *light)
-{
-	long	min;
-	int		group;
-	t_stack	*target;
-	
-	min = LONG_MAX;
-	group = set_next_node(light, set_direction(light))->group;
-	target = light->next;
-	while (target->group == group)
-	{
-		if (target->data < min)
-			min = target->data;
-		target = target->next;
-	}
-	target = light->prev;
-	while (target->group == group)
-	{
-		if (target->data < min)
-			min = target->data;
-		target = target->prev;
-	}
-	return (min);
-}
-
-long	get_max(t_stack *light)
-{
-	long	max;
-	int		group;
-	t_stack	*target;
-
-	max = LONG_MIN;
-	group = set_next_node(light, set_direction(light))->group;
-	target = light->next;
-	while (target->group == group)
-	{
-		if (max < target->data)
-			max = target->data;
-		target = target->next;
-	}
-	target = light->prev;
-	while (target->group == group)
-	{
-		if (max < target->data)
-			max = target->data;
-		target = target->prev;
-	}
-	return (max);
-}
-
 long	get_reference(t_stack *light)
 {
 	if (light->group == A)
@@ -71,23 +20,42 @@ long	get_reference(t_stack *light)
 		return (get_max(light));
 }
 
+
+int	calculate_dir(t_stack *light, long reference)
+{
+	t_stack	*target;
+	int		cnt;
+	int		size;
+
+	size = count_stack_size(light) / 2 + 1;
+	target = light->next;
+	cnt = 0;
+	while (target->group != light->group)
+	{
+		cnt++;
+		if (target->data == reference)
+			break;
+		target = target->next;
+	}
+	if (cnt < size)
+		return (CW);
+	else
+		return (CCW);
+}
+
 int	push_reference(t_stack *light, t_stack *dark, int group)
 {
 	int		size;
 	long	reference;
-	int		direction;
+	int		dir;
 
-	// direction = CW;
 	reference = get_reference(light);
-	// printf("reference = %ld\n", reference);
-	direction = calculate_direction(light, reference);
-	// __print_stack(light);
-	size = count_group_size(light, direction);
-	// printf("\x1b[34msize = %d\x1b[0m\n", size);
-	// printf("direction = %d\n", direction);
+	dir = calculate_dir(light, reference);
+	size = count_group_size(light, dir);
+
 	while (0 < size--)
 	{
-		if (direction == CCW)
+		if (dir == CCW)
 			r_rotate(light, TRUE);
 		if (light->next->data == reference)
 		{
@@ -96,20 +64,20 @@ int	push_reference(t_stack *light, t_stack *dark, int group)
 			push(light, dark);
 			break ;
 		}
-		else if (direction == CW)
+		else if (dir == CW)
 			rotate(light, TRUE);
 	}
-	return (direction);
+	return (dir);
 }
 
-int	extreme_sort(t_stack *light, t_stack *dark, int group, int direction)
+int	extreme_sort(t_stack *light, t_stack *dark, int group, int dir)
 {
-	direction = push_reference(light, dark, group);
-	if (light->group == A && count_group_size(light, direction) < 3)
+	dir = push_reference(light, dark, group);
+	if (light->group == A && count_group_size(light, dir) < 3)
 	{
 		if (light->next->group == light->prev->group)
 		{
-			if (direction == CW)
+			if (dir == CW)
 				r_rotate(light, TRUE);
 			else
 				rotate(light, TRUE);
@@ -120,5 +88,5 @@ int	extreme_sort(t_stack *light, t_stack *dark, int group, int direction)
 		&& dark->next->group != light->prev->group)
 		return (FALSE);
 	else
-		return (extreme_sort(light, dark, group, direction));
+		return (extreme_sort(light, dark, group, dir));
 }
