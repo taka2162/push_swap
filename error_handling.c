@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:52:30 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/16 16:56:48 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/16 17:09:46 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	is_duplicate(long value, long *save, int indx)
 	int	i;
 
 	i = 0;
-	while (i < indx)
+	while (i < indx - 1)
 	{
 		if (save[i] == value)
 			return (TRUE);
