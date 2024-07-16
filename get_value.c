@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_max_min.c                                      :+:      :+:    :+:   */
+/*   get_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:37:31 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/10 17:19:22 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/16 16:49:54 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ long	get_min(t_stack *light)
 	long	min;
 	int		group;
 	t_stack	*target;
-	
+
 	min = LONG_MAX;
 	group = set_next_node(light, set_dir(light))->group;
 	target = light->next;
@@ -60,4 +60,31 @@ long	get_max(t_stack *light)
 		target = target->prev;
 	}
 	return (max);
+}
+
+long	get_median(t_stack *stack, int dir)
+{
+	long	pivot;
+	int		len_to_median;
+	long	min;
+	int		group;
+	t_stack	*head;
+
+	head = stack;
+	len_to_median = count_group_size(stack, dir) / 2 + 1;
+	group = set_next_node(stack, dir)->group;
+	min = LONG_MIN;
+	while (0 < len_to_median--)
+	{
+		stack = set_next_node(head, dir);
+		pivot = LONG_MAX;
+		while (stack->group == group)
+		{
+			if (min < stack->data && stack->data < pivot)
+				pivot = stack->data;
+			stack = set_next_node(stack, dir);
+		}
+		min = pivot;
+	}
+	return (pivot);
 }

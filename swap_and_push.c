@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_and_push.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:00:11 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/02 15:28:18 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/16 16:37:04 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	swap(t_stack *stack, int show_motion)
 	t_stack	*first;
 	t_stack	*second;
 	t_stack	*third;
-	
+
 	if (count_stack_size(stack) < 2)
 		return ;
 	first = stack->next;
@@ -50,7 +50,7 @@ void	push(t_stack *throw, t_stack *catch)
 	t_stack	*target;
 	t_stack	*second;
 	t_stack	*c_next;
-	
+
 	if (count_stack_size(throw) == 0)
 		return ;
 	target = throw->next;

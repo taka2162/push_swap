@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_and_reverse.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:28:22 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/26 16:00:00 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/16 16:43:37 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	r_rotate(t_stack *stack, int show_motion)
 	l_second->next = stack;
 	if (show_motion == FALSE)
 		return ;
-	if (stack->group == A)	
+	if (stack->group == A)
 		ft_putstr_fd("rra\n", 1);
 	else if (stack->group == B)
 		ft_putstr_fd("rrb\n", 1);

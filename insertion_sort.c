@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   insertion_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 15:59:51 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/10 17:19:22 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/16 16:40:42 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	push_best_node(t_stack *light, t_stack *dark, t_pos pos)
 {
-	while (0 < pos.a && 0 < pos.b && 0 < pos.a-- * pos.b--)
+	while (0 < pos.a && 0 < pos.b && 0 < (pos.a--) * (pos.b--))
 		rr(light, dark);
-	while (pos.a < 0 && pos.b < 0 && 0 < pos.a++ * pos.b++)
+	while (pos.a < 0 && pos.b < 0 && 0 < (pos.a++) * (pos.b++))
 		rrr(light, dark);
 	while (0 < pos.a && 0 < pos.a--)
 		rotate(light, TRUE);
@@ -60,7 +60,7 @@ void	initialize_group(t_stack *light, int group, int dir)
 {
 	t_stack	*target;
 	int		original;
-	
+
 	target = set_next_node(light, dir);
 	original = target->group;
 	while (target->group == original)

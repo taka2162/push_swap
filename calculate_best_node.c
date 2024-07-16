@@ -45,7 +45,7 @@ int	calculate_best_pos(t_stack *dark, long value)
 	}
 	pos *= dir / 3;
 	if (size / 2 < abs(pos))
-		pos = (size - pos) * (dir * -1 / 3);
+		pos = (size - abs(pos)) * (dir * -1 / 3);
 	return (pos);
 }
 
@@ -67,16 +67,10 @@ int	least_cost(int pos_a, int pos_b)
 t_pos	set_pos(t_pos pos, int pos_b, int size, int cnt)
 {
 	int	pos_a;
-	int	dir;
 
-	if (0 <= cnt)
-		dir = CW;
-	else
-		dir = CCW;
-	cnt = abs(cnt);
-	pos_a = cnt * (dir / 3);
-	if (pos_a > size / 2)
-		pos_a = (size - cnt) * -1;
+	pos_a = cnt;
+	if (abs(pos_a) > size / 2)
+		pos_a = (size - abs(cnt)) * -1;
 	if (least_cost(pos_a, pos_b) < least_cost(pos.a, pos.b))
 	{
 		pos.a = pos_a;
@@ -96,7 +90,7 @@ t_pos	choose_best_node(t_stack *light, t_stack *dark, int mark, int dir)
 	size = count_stack_size(light);
 	pos.a = INT_MAX;
 	pos.b = 0;
-	cnt = 0 - (1 - dir / 3);
+	cnt = (-1 + dir / 3) / 2;
 	target = set_next_node(light, dir);
 	while (target->group == dark->next->group)
 	{
@@ -107,7 +101,7 @@ t_pos	choose_best_node(t_stack *light, t_stack *dark, int mark, int dir)
 		target = set_next_node(target, dir);
 	}
 	if (dir == CW)
-		reverse = choose_best_node(light, dark, size - abs(cnt), dir * -1);
+		reverse = choose_best_node(light, dark, size - abs(cnt), CCW);
 	if (dir == CW && abs(pos.a - pos.b) > abs(reverse.a - reverse.b))
 			pos = reverse;
 	return (pos);

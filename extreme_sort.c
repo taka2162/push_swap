@@ -20,7 +20,6 @@ long	get_reference(t_stack *light)
 		return (get_max(light));
 }
 
-
 int	calculate_dir(t_stack *light, long reference)
 {
 	t_stack	*target;
@@ -34,7 +33,7 @@ int	calculate_dir(t_stack *light, long reference)
 	{
 		cnt++;
 		if (target->data == reference)
-			break;
+			break ;
 		target = target->next;
 	}
 	if (cnt < size)
@@ -52,7 +51,6 @@ int	push_reference(t_stack *light, t_stack *dark, int group)
 	reference = get_reference(light);
 	dir = calculate_dir(light, reference);
 	size = count_group_size(light, dir);
-
 	while (0 < size--)
 	{
 		if (dir == CCW)

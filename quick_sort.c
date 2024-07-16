@@ -88,18 +88,16 @@ int	sort_light(t_stack *light, t_stack *dark, int *group, int dir)
 		divide_group(light, dark, *group, dir);
 		flag = TRUE;
 	}
-	return flag;
+	return (flag);
 }
 
 void	quick_sort(t_stack *light, t_stack *dark, int group)
 {
 	int	dir;
 	int	flag;
-	int	size;
 
 	dir = set_dir(light);
 	flag = sort_light(light, dark, &group, dir);
-	size = count_group_size(light, dir);
 	if (light->next == light || dark->next == dark)
 		return ;
 	if (light->group == A)
@@ -124,4 +122,3 @@ void	quick_sort(t_stack *light, t_stack *dark, int group)
 	// printf("flag = %d\n", flag);
 	// printf("\x1b[32msize = %d\n", size);
 	// printf("__________________________|\x1b[m\n");
-
