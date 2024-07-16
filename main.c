@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:45:28 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/16 17:16:55 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/16 17:19:50 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-// __attribute__((destructor))
-// static void destructor() {
-//    system("leaks -q push_swap");
-// }
+__attribute__((destructor))
+static void destructor() {
+   system("leaks -q push_swap");
+}
