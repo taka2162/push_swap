@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft/libft.h"
 
 int	is_integer(char *str)
 {
@@ -55,50 +56,89 @@ long	long_atoi(const char *nptr)
 	return (result * sign);
 }
 
-int	is_duplicate(long value, long *save, int indx)
+int	is_duplicate(long value, t_stack *a)
 {
-	int	i;
+	t_stack *target;
 
-	i = 0;
-	while (i < indx - 1)
+	target = a->next;
+	while (target != a)
 	{
-		if (save[i] == value)
+		if (target->data == value)
 			return (TRUE);
-		i++;
+		target = target->next;
 	}
 	return (FALSE);
 }
 
-int	is_error(int argc, char **argv)
+void	free_str(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != NULL)
+	{
+		free(str[i]);
+		str[i] = NULL;
+		i++;
+	}
+	free(str);
+	str = NULL;
+}
+
+int	add_node(t_stack *head, long data)
+{
+	t_stack	*new;
+	t_stack	*first;
+
+	new = (t_stack *)malloc(sizeof(t_stack));
+	if (new == NULL)
+		return (FALSE);
+	new->data = data;
+	new->group = 0;
+	first = head->prev;
+	new->next = head;
+	new->prev = first;
+	first->next = new;
+	head->prev = new;
+	return (TRUE);
+}
+
+int	is_error(int argc, t_stack *a, char **argv)
 {
 	int		i;
-	long	*save;
+	int		j;
+	char	**str;
 
-	save = (long *)malloc((argc - 1) * sizeof(long));
-	if (save == NULL)
-		return (FALSE);
-	// save[argc - 1] = (long)NULL;
 	i = 1;
 	while (i < argc)
 	{
-		if (is_integer(argv[i]) == FALSE)
-		{
-			printf("not integer\n");
-			return (free(save), TRUE);
-		}
-		if (long_atoi(argv[i]) > INT_MAX || INT_MIN > long_atoi(argv[i]))
-		{
-			printf("bigger than integer\n");
-			return (free(save), TRUE);
-		}
-		if (is_duplicate(long_atoi(argv[i]), save, i) == TRUE)
-		{
-			printf("duplicates\n");
-			return (free(save), TRUE);
-		}
-		save[i - 1] = long_atoi(argv[i]);
+		str = ft_split(argv[i], ' ');
+		if (str == NULL)
+			return (TRUE);
 		i++;
+		j = 0;
+		while (str[j] != NULL)
+		{
+			if (is_integer(str[j]) == FALSE)
+			{
+				printf("not integer\n");
+				return (free_str(str), TRUE);
+			}
+			if (long_atoi(str[j]) > INT_MAX || INT_MIN > long_atoi(str[j]))
+			{
+				printf("bigger than integer\n");
+				return (free_str(str), TRUE);
+			}
+			if (is_duplicate(long_atoi(str[j]), a) == TRUE)
+			{
+				printf("duplicates\n");
+				return (free_str(str), TRUE);
+			}
+			if (add_node(a, long_atoi(str[j])) == FALSE)
+				return (free_str(str), TRUE);
+			j++;
+		}
+		free_str(str);
 	}
-	free(save);
 	return (FALSE);
 }

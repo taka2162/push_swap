@@ -43,7 +43,8 @@ typedef struct s_pos
 }	t_pos;
 
 void	input_argvs(t_stack *a, int argc, char **argv);
-int		is_error(int argc, char **argv);
+void	input_arglist(t_stack *a, long *arg_list);
+int		is_error(int argc, t_stack *a, char **argv);
 
 void	initialize_stack(t_stack *a, t_stack *b);
 void	clear_stack(t_stack *stack);

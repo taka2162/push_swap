@@ -39,19 +39,20 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
-	if (is_error(argc, argv) == TRUE)
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (0);
-	}
 	a = (t_stack *)malloc(sizeof(t_stack));
 	if (a == NULL)
 		return (1);
 	b = (t_stack *)malloc(sizeof(t_stack));
 	if (b == NULL)
-		return (1);
+		return (free(a), 1);
 	initialize_stack(a, b);
-	input_argvs(a, argc, argv);
+	if (is_error(argc, a, argv) == TRUE)
+	{
+		ft_putstr_fd("Error\n", 2);
+		clear_stack(a);
+		clear_stack(b);
+		return (0);
+	}
 	quick_sort(a, b, 0);
 	// __print_stack(a);
 	// __print_stack(b);
@@ -60,7 +61,7 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-__attribute__((destructor))
-static void destructor() {
-   system("leaks -q push_swap");
-}
+//__attribute__((destructor))
+//static void destructor() {
+//   system("leaks -q push_swap");
+//}
