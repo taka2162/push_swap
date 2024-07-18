@@ -121,17 +121,17 @@ int	is_error(int argc, t_stack *a, char **argv)
 		{
 			if (is_integer(str[j]) == FALSE)
 			{
-				printf("not integer\n");
+				printf("->\x1b[35m%s\x1b[m not integer\n", str[j]);
 				return (free_str(str), TRUE);
 			}
 			if (long_atoi(str[j]) > INT_MAX || INT_MIN > long_atoi(str[j]))
 			{
-				printf("bigger than integer\n");
+				printf("->\x1b[35m%s\x1b[m bigger than integer\n", str[j]);
 				return (free_str(str), TRUE);
 			}
 			if (is_duplicate(long_atoi(str[j]), a) == TRUE)
 			{
-				printf("duplicates\n");
+				printf("->\x1b[35m%s\x1b[m duplicates\n", str[j]);
 				return (free_str(str), TRUE);
 			}
 			if (add_node(a, long_atoi(str[j])) == FALSE)
