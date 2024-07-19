@@ -75,16 +75,24 @@ int	sort_light(t_stack *light, t_stack *dark, int *group, int dir)
 	flag = FALSE;
 	size = count_group_size(light, dir);
 	if (size <= 2)
+	{
+		//printf("sort_one_or_two\n");
 		sort_one_or_two(light, dark, size, dir);
+	}
 	else if (size <= 9)
+	{
+		//printf("extreme_sort\n");
 		flag = extreme_sort(light, dark, *group, dir);
+	}
 	else if (size <= 365 && light->group == A)
 	{
+		//printf("insertion_sort\n");
 		insertion_sort(light, dark, *group);
 		(*group)++;
 	}
 	else
 	{
+		//printf("divide_group\n");
 		divide_group(light, dark, *group, dir);
 		flag = TRUE;
 	}
@@ -97,7 +105,19 @@ void	quick_sort(t_stack *light, t_stack *dark, int group)
 	int	flag;
 
 	dir = set_dir(light);
+		//printf("\x1b[31mbefore____________________\n");
+	// __print_stack(light);
+	// __print_stack(dark);
+	// //printf("flag = %d\n", flag);
+	// //printf("\x1b[32msize = %d\n", size);
+	//printf("__________________________|\x1b[m\n");
 	flag = sort_light(light, dark, &group, dir);
+		//printf("\x1b[32mafter____________________\n");
+	// __print_stack(light);
+	// __print_stack(dark);
+	// //printf("flag = %d\n", flag);
+	// //printf("\x1b[32msize = %d\n", size);
+	//printf("__________________________|\x1b[m\n");
 	if (light->next == light || dark->next == dark)
 		return ;
 	if (light->group == A)
@@ -116,9 +136,9 @@ void	quick_sort(t_stack *light, t_stack *dark, int group)
 	}
 }
 
-	// printf("\x1b[32mafter____________________\n");
+	// //printf("\x1b[32mafter____________________\n");
 	// __print_stack(light);
 	// __print_stack(dark);
-	// printf("flag = %d\n", flag);
-	// printf("\x1b[32msize = %d\n", size);
-	// printf("__________________________|\x1b[m\n");
+	// //printf("flag = %d\n", flag);
+	// //printf("\x1b[32msize = %d\n", size);
+	// //printf("__________________________|\x1b[m\n");

@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:52:30 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/16 17:09:46 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/19 14:34:14 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	is_integer(char *str)
 			return (FALSE);
 		i++;
 	}
+	if (i == 0)
+		return (FALSE);
 	return (TRUE);
 }
 
@@ -113,7 +115,7 @@ int	is_error(int argc, t_stack *a, char **argv)
 	while (i < argc)
 	{
 		str = ft_split(argv[i], ' ');
-		if (str == NULL)
+		if (str == NULL || str[0] == NULL)
 			return (TRUE);
 		i++;
 		j = 0;
@@ -121,17 +123,17 @@ int	is_error(int argc, t_stack *a, char **argv)
 		{
 			if (is_integer(str[j]) == FALSE)
 			{
-				printf("->\x1b[35m%s\x1b[m not integer\n", str[j]);
+				// printf("->\x1b[35m%s\x1b[m not integer\n", str[j]);
 				return (free_str(str), TRUE);
 			}
 			if (long_atoi(str[j]) > INT_MAX || INT_MIN > long_atoi(str[j]))
 			{
-				printf("->\x1b[35m%s\x1b[m bigger than integer\n", str[j]);
+				// printf("->\x1b[35m%s\x1b[m bigger than integer\n", str[j]);
 				return (free_str(str), TRUE);
 			}
 			if (is_duplicate(long_atoi(str[j]), a) == TRUE)
 			{
-				printf("->\x1b[35m%s\x1b[m duplicates\n", str[j]);
+				// printf("->\x1b[35m%s\x1b[m duplicates\n", str[j]);
 				return (free_str(str), TRUE);
 			}
 			if (add_node(a, long_atoi(str[j])) == FALSE)

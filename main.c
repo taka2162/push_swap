@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:45:28 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/16 17:19:50 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/19 14:58:07 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	main(int argc, char **argv)
 		clear_stack(b);
 		return (0);
 	}
-	quick_sort(a, b, 0);
+	if (count_stack_size(a) == 3)
+		sort_three_nodes(a);
+	else
+		quick_sort(a, b, 0);
 	// __print_stack(a);
 	// __print_stack(b);
 	clear_stack(a);
