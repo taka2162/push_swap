@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:56 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/21 18:11:32 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/21 19:32:08 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ typedef struct s_pos
 }	t_pos;
 
 void	input_argvs(t_stack *a, int argc, char **argv);
-void	input_arglist(t_stack *a, long *arg_list);
+int		add_node(t_stack *head, long data);
 int		is_error(t_stack *a, int argc, char **argv);
 
-void	initialize_stack(t_stack *a, t_stack *b);
+void	initialize_stack(t_stack **a, t_stack **b);
 void	clear_stack(t_stack *stack);
 
 void	swap(t_stack *stack, int show_motion);

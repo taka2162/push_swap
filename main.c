@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:45:28 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/21 18:12:55 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/21 19:29:47 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,17 @@ void	__print_stack(t_stack *stack)
 	printf("\n");
 }
 
+void	error_exit(t_stack *a, t_stack *b)
+{
+	clear_stack(a);
+	clear_stack(b);
+	ft_putstr_fd("Error\n", 2);
+	exit(1);
+}
+
 int	is_sorted(t_stack *a)
 {
-	t_stack *target;
+	t_stack	*target;
 
 	target = a->next;
 	while (target->next != a)
@@ -46,6 +54,33 @@ int	is_sorted(t_stack *a)
 	return (TRUE);
 }
 
+void	sort_three_nodes(t_stack *stack)
+{
+	long	first;
+	long	second;
+	long	third;
+
+	first = stack->next->data;
+	second = stack->next->next->data;
+	third = stack->next->next->next->data;
+	if (first > second && second > third)
+	{
+		swap(stack, TRUE);
+		r_rotate(stack, TRUE);
+	}
+	else if (first > second && third > second && first > third)
+		rotate(stack, TRUE);
+	else if (first > second && third > second && third > first)
+		swap(stack, TRUE);
+	else if (second > first && second > third && first > third)
+		r_rotate(stack, TRUE);
+	else if (second > first && second > third && third > first)
+	{
+		r_rotate(stack, TRUE);
+		swap(stack, TRUE);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
@@ -53,21 +88,9 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
-	a = (t_stack *)malloc(sizeof(t_stack));
-	if (a == NULL)
-		return (1);
-	b = (t_stack *)malloc(sizeof(t_stack));
-	if (b == NULL)
-		return (free(a), 1);
-	initialize_stack(a, b);
-	
+	initialize_stack(&a, &b);
 	if (is_error(a, argc, argv) == TRUE)
-	{
-		ft_putstr_fd("Error\n", 2);
-		clear_stack(a);
-		clear_stack(b);
-		return (0);
-	}
+		error_exit(a, b);
 	if (is_sorted(a) == TRUE)
 		return (clear_stack(a), clear_stack(b), 0);
 	else if (count_stack_size(a) <= 2)
@@ -78,8 +101,6 @@ int	main(int argc, char **argv)
 		insertion_sort(a, b, 0, TRUE);
 	else
 		quick_sort(a, b, 0);
-	// __print_stack(a);
-	// __print_stack(b);
 	clear_stack(a);
 	clear_stack(b);
 	return (0);

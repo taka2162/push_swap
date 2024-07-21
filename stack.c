@@ -6,49 +6,49 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:45 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/21 17:45:04 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/21 19:31:52 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	initialize_stack(t_stack *a, t_stack *b)
+void	initialize_stack(t_stack **a, t_stack **b)
 {
-	a->data = 0;
-	b->data = 0;
-	a->group = -1;
-	b->group = -2;
-	a->next = a;
-	b->next = b;
-	a->prev = a;
-	b->prev = b;
+	(*a) = (t_stack *)malloc(sizeof(t_stack));
+	if ((*a) == NULL)
+		exit(1);
+	(*b) = (t_stack *)malloc(sizeof(t_stack));
+	if ((*b) == NULL)
+	{
+		free((*a));
+		exit(1);
+	}
+	(*a)->data = 0;
+	(*b)->data = 0;
+	(*a)->group = -1;
+	(*b)->group = -2;
+	(*a)->next = (*a);
+	(*b)->next = (*b);
+	(*a)->prev = (*a);
+	(*b)->prev = (*b);
 }
 
-void	sort_three_nodes(t_stack *stack)
+int	add_node(t_stack *head, long data)
 {
-	long	first;
-	long	second;
-	long	third;
+	t_stack	*new;
+	t_stack	*first;
 
-	first = stack->next->data;
-	second = stack->next->next->data;
-	third = stack->next->next->next->data;
-	if (first > second && second > third)
-	{
-		swap(stack, TRUE);
-		r_rotate(stack, TRUE);
-	}
-	else if (first > second && third > second && first > third)
-		rotate(stack, TRUE);
-	else if (first > second && third > second && third > first)
-		swap(stack, TRUE);
-	else if (second > first && second > third && first > third)
-		r_rotate(stack, TRUE);
-	else if (second > first && second > third && third > first)
-	{
-		r_rotate(stack, TRUE);
-		swap(stack, TRUE);
-	}
+	new = (t_stack *)malloc(sizeof(t_stack));
+	if (new == NULL)
+		return (FALSE);
+	new->data = data;
+	new->group = 0;
+	first = head->prev;
+	new->next = head;
+	new->prev = first;
+	first->next = new;
+	head->prev = new;
+	return (TRUE);
 }
 
 int	count_stack_size(t_stack *stack)
