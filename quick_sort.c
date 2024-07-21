@@ -76,23 +76,23 @@ int	sort_light(t_stack *light, t_stack *dark, int *group, int dir)
 	size = count_group_size(light, dir);
 	if (size <= 2)
 	{
-		//printf("sort_one_or_two\n");
+		// printf("sort_one_or_two\n");
 		sort_one_or_two(light, dark, size, dir);
 	}
 	else if (size <= 9)
 	{
-		//printf("extreme_sort\n");
+		// printf("extreme_sort\n");
 		flag = extreme_sort(light, dark, *group, dir);
 	}
 	else if (size <= 365 && light->group == A)
 	{
-		//printf("insertion_sort\n");
-		insertion_sort(light, dark, *group);
+		// printf("insertion_sort\n");
+		insertion_sort(light, dark, *group, FALSE);
 		(*group)++;
 	}
 	else
 	{
-		//printf("divide_group\n");
+		// printf("divide_group\n");
 		divide_group(light, dark, *group, dir);
 		flag = TRUE;
 	}

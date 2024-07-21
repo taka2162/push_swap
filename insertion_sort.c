@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 15:59:51 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/19 15:42:33 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/21 17:45:24 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	push_to_b(t_stack *light, t_stack *dark, t_pos pos)
 	push(light, dark);
 }
 
-void	push_to_a(t_stack *light, t_stack *dark, int group)
+void	push_to_a(t_stack *light, t_stack *dark, int group, int flag)
 {
 	// int		group;
 	int		count;
@@ -52,17 +52,30 @@ void	push_to_a(t_stack *light, t_stack *dark, int group)
 		else
 			rotate(dark, TRUE);
 	}
+	count = 3;
 	while (dark->next->group == group || light->prev->data < light->next->data)
 	{
-		// if (light->prev->data < light->next->data && light->prev->data > dark->next->data)
+		// if (dark->next->data < light->prev->data && 0 < count)
 		// {
-		// 	// __print_stack(light);
-		// 	// __print_stack(dark);	
+		// 	__print_stack(light);
+		// 	__print_stack(dark);	
 		// 	r_rotate(light, TRUE);
-		// 	continue ;
+		// 	count--;
 		// }
+		if (flag == TRUE && dark->next->data < light->prev->data && 0 < count)
+		{
+			// __print_stack(light);
+			// __print_stack(dark);	
+			r_rotate(light, TRUE);
+			count--;
+			continue ;
+		}
+		if (count_stack_size(dark) == 0)
+			break ;
 		push(dark, light);
 	}
+	while (flag == TRUE && 0 < count--)
+		r_rotate(light, TRUE);
 	// printf("dark->next->data = %ld\n", dark->next->data);
 }
 
@@ -107,7 +120,7 @@ void	sort_three_sort_group(t_stack *stack)
 	}
 }
 
-void	insertion_sort(t_stack *light, t_stack *dark, int group)
+void	insertion_sort(t_stack *light, t_stack *dark, int group, int flag)
 {
 	t_pos	pos;
 	int		dir;
@@ -121,22 +134,34 @@ void	insertion_sort(t_stack *light, t_stack *dark, int group)
 		r_rotate(light, TRUE);
 	}
 	push(light, dark);
-	push(light, dark);
+	if (count_stack_size(light) > 3)
+		push(light, dark);
 	if (dark->next->data < dark->next->next->data)
 		swap(dark, TRUE);
 	while (light->next->group == group + 1 || light->prev->group == group + 1)
 	{
+		if (flag == TRUE && count_stack_size(light) <= 3)
+			break ;
+		// __print_stack(light);
+		// __print_stack(dark);
 		pos = choose_best_node(light, dark, 0, CW);
+		// printf("pos.a = %d  pos.b = %d\n", pos.a, pos.b);
 		push_to_b(light, dark, pos);
-		// if (count_group_size(light, dir) <= 2)
-		// 	break ;
+		// printf("groupsize = %d\n", count_group_size(light, set_dir(light)));
 	}
-	sort_one_or_two(light, dark, count_group_size(light, dir), dir);
-	// printf("---after sort_one_or_two  \n  ");
+	// printf("---before sort_three_nodes  \n");
+	// __print_stack(light);
+	// __print_stack(dark);
+	if (flag == TRUE && count_stack_size(light) <= 3)
+	{
+		// printf("\x1b[33msort_three_nodes\n");
+		sort_three_nodes(light);
+	}
+	// printf("---after sort_three_nodes  \n");
 	// __print_stack(light);
 	// __print_stack(dark);
 	dark_group = set_next_node(dark, dir)->group;
-	push_to_a(light, dark, dark_group);
+	push_to_a(light, dark, dark_group, flag);
 	// printf("---after push_to_a  \n  ");
 	// __print_stack(light);
 	// __print_stack(dark);

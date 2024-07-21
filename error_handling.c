@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:52:30 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/19 14:34:14 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/21 18:11:21 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	add_node(t_stack *head, long data)
 	return (TRUE);
 }
 
-int	is_error(int argc, t_stack *a, char **argv)
+int	is_error(t_stack *a, int argc, char **argv)
 {
 	int		i;
 	int		j;

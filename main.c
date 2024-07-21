@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:45:28 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/19 14:58:07 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/21 18:12:55 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ void	__print_stack(t_stack *stack)
 	printf("\n");
 }
 
+int	is_sorted(t_stack *a)
+{
+	t_stack *target;
+
+	target = a->next;
+	while (target->next != a)
+	{
+		if (target->data > target->next->data)
+			return (FALSE);
+		target = target->next;
+	}
+	return (TRUE);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
@@ -46,15 +60,22 @@ int	main(int argc, char **argv)
 	if (b == NULL)
 		return (free(a), 1);
 	initialize_stack(a, b);
-	if (is_error(argc, a, argv) == TRUE)
+	
+	if (is_error(a, argc, argv) == TRUE)
 	{
 		ft_putstr_fd("Error\n", 2);
 		clear_stack(a);
 		clear_stack(b);
 		return (0);
 	}
-	if (count_stack_size(a) == 3)
+	if (is_sorted(a) == TRUE)
+		return (clear_stack(a), clear_stack(b), 0);
+	else if (count_stack_size(a) <= 2)
+		sort_one_or_two(a, b, count_stack_size(a), CW);
+	else if (count_stack_size(a) == 3)
 		sort_three_nodes(a);
+	else if (count_stack_size(a) <= 365)
+		insertion_sort(a, b, 0, TRUE);
 	else
 		quick_sort(a, b, 0);
 	// __print_stack(a);
