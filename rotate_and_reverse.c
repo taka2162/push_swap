@@ -6,14 +6,14 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 16:28:22 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/16 16:43:37 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/22 15:31:56 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void	rotate(t_stack *stack, int show_motion)
+void	rotate(t_stack *stack, bool show_motion)
 {
 	t_stack	*first;
 	t_stack	*last;
@@ -30,7 +30,7 @@ void	rotate(t_stack *stack, int show_motion)
 	first->prev = last;
 	last->next = first;
 	second->prev = stack;
-	if (show_motion == FALSE)
+	if (!show_motion)
 		return ;
 	if (stack->group == A)
 		ft_putstr_fd("ra\n", 1);
@@ -40,12 +40,12 @@ void	rotate(t_stack *stack, int show_motion)
 
 void	rr(t_stack *a, t_stack *b)
 {
-	rotate(a, FALSE);
-	rotate(b, FALSE);
+	rotate(a, false);
+	rotate(b, false);
 	ft_putstr_fd("rr\n", 1);
 }
 
-void	r_rotate(t_stack *stack, int show_motion)
+void	r_rotate(t_stack *stack, bool show_motion)
 {
 	t_stack	*first;
 	t_stack	*last;
@@ -62,7 +62,7 @@ void	r_rotate(t_stack *stack, int show_motion)
 	last->next = first;
 	last->prev = stack;
 	l_second->next = stack;
-	if (show_motion == FALSE)
+	if (!show_motion)
 		return ;
 	if (stack->group == A)
 		ft_putstr_fd("rra\n", 1);
@@ -72,7 +72,7 @@ void	r_rotate(t_stack *stack, int show_motion)
 
 void	rrr(t_stack *a, t_stack *b)
 {
-	r_rotate(a, FALSE);
-	r_rotate(b, FALSE);
+	r_rotate(a, false);
+	r_rotate(b, false);
 	ft_putstr_fd("rrr\n", 1);
 }

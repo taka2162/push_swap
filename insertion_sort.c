@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 15:59:51 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/21 18:32:10 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/22 19:02:31 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void	push_to_b(t_stack *light, t_stack *dark, t_pos pos)
 	while (pos.a < 0 && pos.b < 0 && 0 < (pos.a++) * (pos.b++))
 		rrr(light, dark);
 	while (0 < pos.a && 0 < pos.a--)
-		rotate(light, TRUE);
+		rotate(light, true);
 	while (pos.a < 0 && pos.a++ < 0)
-		r_rotate(light, TRUE);
+		r_rotate(light, true);
 	while (0 < pos.b && 0 < pos.b--)
-		rotate(dark, TRUE);
+		rotate(dark, true);
 	while (pos.b < 0 && pos.b++ < 0)
-		r_rotate(dark, TRUE);
+		r_rotate(dark, true);
 	push(light, dark);
 }
 
-void	push_to_a(t_stack *light, t_stack *dark, int group, int flag)
+void	push_to_a(t_stack *light, t_stack *dark, int group, bool flag)
 {
 	int		count;
 	long	max;
@@ -46,16 +46,16 @@ void	push_to_a(t_stack *light, t_stack *dark, int group, int flag)
 	while (dark->prev->data > dark->next->data && dark->prev->group == group)
 	{
 		if (count_stack_size(dark) / 2 < count)
-			r_rotate(dark, TRUE);
+			r_rotate(dark, true);
 		else
-			rotate(dark, TRUE);
+			rotate(dark, true);
 	}
 	count = 3;
 	while (dark->next->group == group || light->prev->data < light->next->data)
 	{
-		if (flag == TRUE && dark->next->data < light->prev->data && 0 < count)
+		if (flag == true && dark->next->data < light->prev->data && 0 < count)
 		{
-			r_rotate(light, TRUE);
+			r_rotate(light, true);
 			count--;
 			continue ;
 		}
@@ -63,8 +63,8 @@ void	push_to_a(t_stack *light, t_stack *dark, int group, int flag)
 			break ;
 		push(dark, light);
 	}
-	while (flag == TRUE && 0 < count--)
-		r_rotate(light, TRUE);
+	while (flag == true && 0 < count--)
+		r_rotate(light, true);
 }
 
 void	initialize_group(t_stack *light, int group, int dir)
@@ -92,23 +92,23 @@ void	sort_three_sort_group(t_stack *stack)
 	third = stack->next->next->next->data;
 	if (first > second && second > third)
 	{
-		swap(stack, TRUE);
-		r_rotate(stack, TRUE);
+		swap(stack, true);
+		r_rotate(stack, true);
 	}
 	else if (first > second && third > second && first > third)
-		rotate(stack, TRUE);
+		rotate(stack, true);
 	else if (first > second && third > second && third > first)
-		swap(stack, TRUE);
+		swap(stack, true);
 	else if (second > first && second > third && first > third)
-		r_rotate(stack, TRUE);
+		r_rotate(stack, true);
 	else if (second > first && second > third && third > first)
 	{
-		r_rotate(stack, TRUE);
-		swap(stack, TRUE);
+		r_rotate(stack, true);
+		swap(stack, true);
 	}
 }
 
-void	insertion_sort(t_stack *light, t_stack *dark, int group, int flag)
+void	insertion_sort(t_stack *light, t_stack *dark, int group, bool flag)
 {
 	t_pos	pos;
 	int		dir;
@@ -118,22 +118,22 @@ void	insertion_sort(t_stack *light, t_stack *dark, int group, int flag)
 	initialize_group(light, group, dir);
 	if (dir == CCW)
 	{
-		r_rotate(light, TRUE);
-		r_rotate(light, TRUE);
+		r_rotate(light, true);
+		r_rotate(light, true);
 	}
 	push(light, dark);
 	if (count_stack_size(light) > 3)
 		push(light, dark);
 	if (dark->next->data < dark->next->next->data)
-		swap(dark, TRUE);
+		swap(dark, true);
 	while (light->next->group == group + 1 || light->prev->group == group + 1)
 	{
-		if (flag == TRUE && count_stack_size(light) <= 3)
+		if (flag == true && count_stack_size(light) <= 3)
 			break ;
 		pos = choose_best_node(light, dark, 0, CW);
 		push_to_b(light, dark, pos);
 	}
-	if (flag == TRUE && count_stack_size(light) <= 3)
+	if (flag == true && count_stack_size(light) <= 3)
 		sort_three_nodes(light);
 	dark_group = set_next_node(dark, dir)->group;
 	push_to_a(light, dark, dark_group, flag);

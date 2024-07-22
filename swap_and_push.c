@@ -6,14 +6,14 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:00:11 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/16 16:37:04 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/22 15:48:18 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h" 
 
-void	swap(t_stack *stack, int show_motion)
+void	swap(t_stack *stack, bool show_motion)
 {
 	t_stack	*first;
 	t_stack	*second;
@@ -30,7 +30,7 @@ void	swap(t_stack *stack, int show_motion)
 	second->next = first;
 	second->prev = stack;
 	third->prev = first;
-	if (show_motion == FALSE)
+	if (!show_motion)
 		return ;
 	if (stack->group == A)
 		ft_putstr_fd("sa\n", 1);
@@ -40,8 +40,8 @@ void	swap(t_stack *stack, int show_motion)
 
 void	ss(t_stack *a, t_stack *b)
 {
-	swap(a, FALSE);
-	swap(b, FALSE);
+	swap(a, false);
+	swap(b, false);
 	ft_putstr_fd("ss\n", 1);
 }
 
@@ -62,8 +62,8 @@ void	push(t_stack *throw, t_stack *catch)
 	catch->next = target;
 	throw->next = second;
 	c_next->prev = target;
-	if (throw->group == -1)
+	if (throw->group == A)
 		ft_putstr_fd("pb\n", 1);
-	else if (throw->group == -2)
+	else if (throw->group == B)
 		ft_putstr_fd("pa\n", 1);
 }

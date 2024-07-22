@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:45:28 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/21 19:29:47 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/22 18:57:50 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	error_exit(t_stack *a, t_stack *b)
 	exit(1);
 }
 
-int	is_sorted(t_stack *a)
+bool	is_sorted(t_stack *a)
 {
 	t_stack	*target;
 
@@ -48,10 +48,10 @@ int	is_sorted(t_stack *a)
 	while (target->next != a)
 	{
 		if (target->data > target->next->data)
-			return (FALSE);
+			return (false);
 		target = target->next;
 	}
-	return (TRUE);
+	return (true);
 }
 
 void	sort_three_nodes(t_stack *stack)
@@ -65,19 +65,19 @@ void	sort_three_nodes(t_stack *stack)
 	third = stack->next->next->next->data;
 	if (first > second && second > third)
 	{
-		swap(stack, TRUE);
-		r_rotate(stack, TRUE);
+		swap(stack, true);
+		r_rotate(stack, true);
 	}
 	else if (first > second && third > second && first > third)
-		rotate(stack, TRUE);
+		rotate(stack, true);
 	else if (first > second && third > second && third > first)
-		swap(stack, TRUE);
+		swap(stack, true);
 	else if (second > first && second > third && first > third)
-		r_rotate(stack, TRUE);
+		r_rotate(stack, true);
 	else if (second > first && second > third && third > first)
 	{
-		r_rotate(stack, TRUE);
-		swap(stack, TRUE);
+		r_rotate(stack, true);
+		swap(stack, true);
 	}
 }
 
@@ -89,16 +89,16 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	initialize_stack(&a, &b);
-	if (is_error(a, argc, argv) == TRUE)
+	if (is_error(a, argc, argv))
 		error_exit(a, b);
-	if (is_sorted(a) == TRUE)
+	if (is_sorted(a))
 		return (clear_stack(a), clear_stack(b), 0);
 	else if (count_stack_size(a) <= 2)
 		sort_one_or_two(a, b, count_stack_size(a), CW);
 	else if (count_stack_size(a) == 3)
 		sort_three_nodes(a);
 	else if (count_stack_size(a) <= 365)
-		insertion_sort(a, b, 0, TRUE);
+		insertion_sort(a, b, 0, true);
 	else
 		quick_sort(a, b, 0);
 	clear_stack(a);

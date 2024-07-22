@@ -16,7 +16,7 @@ void	push_to_dark(t_stack **light, t_stack *dark, int group, int dir)
 {
 	set_next_node(*light, dir)->group = group + 1;
 	if (dir == CCW)
-		r_rotate(*light, TRUE);
+		r_rotate(*light, true);
 	push(*light, dark);
 }
 
@@ -38,9 +38,9 @@ void	divide_group(t_stack *light, t_stack *dark, int group, int dir)
 		else
 		{
 			if (dir == CW)
-				rotate(light, TRUE);
+				rotate(light, true);
 			else
-				r_rotate(light, TRUE);
+				r_rotate(light, true);
 		}
 		target = set_next_node(light, dir);
 	}
@@ -50,29 +50,29 @@ void	sort_one_or_two(t_stack *light, t_stack *dark, int size, int dir)
 {
 	if (dir == CCW)
 	{
-		r_rotate(light, TRUE);
+		r_rotate(light, true);
 		if (size >= 2)
-			r_rotate(light, TRUE);
+			r_rotate(light, true);
 	}
 	if (light->group == A && size == 2
 		&& light->next->data > light->next->next->data)
-		swap(light, TRUE);
+		swap(light, true);
 	else if (light->group == B)
 	{
 		if (light->next->data < light->next->next->data && size == 2)
-			swap(light, TRUE);
+			swap(light, true);
 		push(light, dark);
 		if (2 <= size)
 			push(light, dark);
 	}
 }
 
-int	sort_light(t_stack *light, t_stack *dark, int *group, int dir)
+bool	sort_light(t_stack *light, t_stack *dark, int *group, int dir)
 {
-	int	flag;
-	int	size;
+	bool	flag;
+	int		size;
 
-	flag = FALSE;
+	flag = false;
 	size = count_group_size(light, dir);
 	if (size <= 2)
 		sort_one_or_two(light, dark, size, dir);
@@ -80,21 +80,21 @@ int	sort_light(t_stack *light, t_stack *dark, int *group, int dir)
 		flag = extreme_sort(light, dark, *group, dir);
 	else if (size <= 365 && light->group == A)
 	{
-		insertion_sort(light, dark, *group, FALSE);
+		insertion_sort(light, dark, *group, false);
 		(*group)++;
 	}
 	else
 	{
 		divide_group(light, dark, *group, dir);
-		flag = TRUE;
+		flag = true;
 	}
 	return (flag);
 }
 
 void	quick_sort(t_stack *light, t_stack *dark, int group)
 {
-	int	dir;
-	int	flag;
+	int		dir;
+	bool	flag;
 
 	dir = set_dir(light);
 	flag = sort_light(light, dark, &group, dir);
@@ -102,14 +102,14 @@ void	quick_sort(t_stack *light, t_stack *dark, int group)
 		return ;
 	if (light->group == A)
 	{
-		if (flag == TRUE)
+		if (flag)
 			quick_sort(light, dark, group + 1);
 		else
 			quick_sort(dark, light, group);
 	}
 	else if (light->group == B)
 	{
-		if (flag == TRUE)
+		if (flag)
 			quick_sort(dark, light, group + 1);
 		else
 			quick_sort(light, dark, group);

@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:56 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/21 19:32:08 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/22 18:24:58 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,16 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <limits.h>
+# include <stdbool.h>
 
-# define TRUE 1
-# define FALSE 0
-# define CW 3
-# define CCW -3
-# define A -1
-# define B -2
-# define STACK 5
-# define GROUP 6
+// # define TRUE 1
+// # define FALSE 0
+# define CW 1
+# define CCW -1
+# define A -2
+# define B -3
+// # define STACK 5
+// # define GROUP 6
 
 typedef struct s_stack
 {
@@ -43,19 +44,19 @@ typedef struct s_pos
 }	t_pos;
 
 void	input_argvs(t_stack *a, int argc, char **argv);
-int		add_node(t_stack *head, long data);
-int		is_error(t_stack *a, int argc, char **argv);
+bool	add_node(t_stack *head, long data);
+bool	is_error(t_stack *a, int argc, char **argv);
 
 void	initialize_stack(t_stack **a, t_stack **b);
 void	clear_stack(t_stack *stack);
 
-void	swap(t_stack *stack, int show_motion);
+void	swap(t_stack *stack, bool show_motion);
 void	ss(t_stack *a, t_stack *b);
 void	pa(t_stack *a, t_stack *b);
 void	push(t_stack *throw, t_stack *catch);
-void	rotate(t_stack *stack, int show_motion);
+void	rotate(t_stack *stack, bool show_motion);
 void	rr(t_stack *a, t_stack *b);
-void	r_rotate(t_stack *stack, int show_motion);
+void	r_rotate(t_stack *stack, bool show_motion);
 void	rrr(t_stack *a, t_stack *b);
 
 int		count_stack_size(t_stack *stack);
@@ -72,9 +73,9 @@ long	get_min(t_stack *light);
 long	get_max(t_stack *light);
 
 t_pos	choose_best_node(t_stack *light, t_stack *dark, int mark, int dir);
-void	insertion_sort(t_stack *light, t_stack *dark, int group, int flag);
+void	insertion_sort(t_stack *light, t_stack *dark, int group, bool flag);
 
-int		extreme_sort(t_stack *light, t_stack *dark, int group, int dir);
+bool	extreme_sort(t_stack *light, t_stack *dark, int group, int dir);
 
 int		set_dir(t_stack *light);
 void	quick_sort(t_stack *light, t_stack *dark, int group);

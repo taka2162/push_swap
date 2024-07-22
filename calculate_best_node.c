@@ -43,9 +43,9 @@ int	calculate_best_pos(t_stack *dark, long value)
 			break ;
 		target = set_next_node(target, dir);
 	}
-	pos *= dir / 3;
+	pos *= dir;
 	if (size / 2 < abs(pos))
-		pos = (size - abs(pos)) * (dir * -1 / 3);
+		pos = (size - abs(pos)) * (dir * -1);
 	return (pos);
 }
 
@@ -90,19 +90,19 @@ t_pos	choose_best_node(t_stack *light, t_stack *dark, int mark, int dir)
 	size = count_stack_size(light);
 	pos.a = INT_MAX;
 	pos.b = 0;
-	cnt = (-1 + dir / 3) / 2;
+	cnt = (-1 + dir) / 2;
 	target = set_next_node(light, dir);
 	while (target->group == dark->next->group)
 	{
 		if (dir == CCW && mark <= abs(cnt))
 			break ;
 		pos = set_pos(pos, calculate_best_pos(dark, target->data), size, cnt);
-		cnt += dir / 3;
+		cnt += dir;
 		target = set_next_node(target, dir);
 	}
 	if (dir == CW)
 		reverse = choose_best_node(light, dark, size - abs(cnt), CCW);
 	if (dir == CW && abs(pos.a - pos.b) > abs(reverse.a - reverse.b))
-			pos = reverse;
+		pos = reverse;
 	return (pos);
 }

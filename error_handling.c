@@ -6,14 +6,14 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:52:30 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/21 19:24:07 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/22 18:53:44 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
 
-int	is_integer(const char *nptr)
+bool	is_integer(const char *nptr)
 {
 	int		sign;
 	long	result;
@@ -29,31 +29,39 @@ int	is_integer(const char *nptr)
 		result = result * 10 + (*nptr - '0');
 		if ((sign == 1 && INT_MAX < result)
 			|| (sign == -1 && result - 1 > INT_MAX))
-			return (FALSE);
+			return (false);
 		nptr++;
 	}
-	return (TRUE);
+	return (true);
 }
 
-int	is_digit_str(char *str)
+bool	is_digit_str(char *str)
 {
-	int	i;
+	int		i;
+	int		sign;
+	long	result;
 
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] != '\0')
+	sign = 1;
+	result = 0;
+	if (*str == '-' || *str == '+')
+		str++;
+	if (*str == '\0')
+		return (false);
+	while ('0' <= *str && *str <= '9')
 	{
-		if (str[i] < '0' || str[i] > '9')
-			return (FALSE);
-		i++;
+		result = result * 10 + (*str - '0');
+		if ((sign == 1 && INT_MAX < result)
+			|| (sign == -1 && result - 1 > INT_MAX))
+			return (false);
+		str++;
 	}
-	if (i == 0 || is_integer(str) == FALSE)
-		return (FALSE);
-	return (TRUE);
+	if (*str != '\0')
+		return (false);
+	return (true);
 }
 
-int	is_duplicate(long value, t_stack *a)
+bool	is_duplicate(long value, t_stack *a)
 {
 	t_stack	*target;
 
@@ -61,10 +69,10 @@ int	is_duplicate(long value, t_stack *a)
 	while (target != a)
 	{
 		if (target->data == value)
-			return (TRUE);
+			return (true);
 		target = target->next;
 	}
-	return (FALSE);
+	return (false);
 }
 
 void	free_str(char **str)
@@ -82,7 +90,7 @@ void	free_str(char **str)
 	str = NULL;
 }
 
-int	is_error(t_stack *a, int argc, char **argv)
+bool	is_error(t_stack *a, int argc, char **argv)
 {
 	int		i;
 	int		j;
@@ -93,20 +101,20 @@ int	is_error(t_stack *a, int argc, char **argv)
 	{
 		str = ft_split(argv[i], ' ');
 		if (str == NULL || str[0] == NULL)
-			return (TRUE);
+			return (true);
 		i++;
 		j = 0;
 		while (str[j] != NULL)
 		{
-			if (is_digit_str(str[j]) == FALSE)
-				return (free_str(str), TRUE);
-			if (is_duplicate(is_digit_str(str[j]), a) == TRUE)
-				return (free_str(str), TRUE);
-			if (add_node(a, (long)ft_atoi(str[j])) == FALSE)
-				return (free_str(str), TRUE);
+			if (!is_digit_str(str[j]))
+				return (free_str(str), true);
+			if (is_duplicate(ft_atoi(str[j]), a))
+				return (free_str(str), true);
+			if (!add_node(a, (long)ft_atoi(str[j])))
+				return (free_str(str), true);
 			j++;
 		}
 		free_str(str);
 	}
-	return (FALSE);
+	return (false);
 }

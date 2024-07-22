@@ -54,7 +54,7 @@ int	push_reference(t_stack *light, t_stack *dark, int group)
 	while (0 < size--)
 	{
 		if (dir == CCW)
-			r_rotate(light, TRUE);
+			r_rotate(light, true);
 		if (light->next->data == reference)
 		{
 			if (light->group == A)
@@ -63,12 +63,12 @@ int	push_reference(t_stack *light, t_stack *dark, int group)
 			break ;
 		}
 		else if (dir == CW)
-			rotate(light, TRUE);
+			rotate(light, true);
 	}
 	return (dir);
 }
 
-int	extreme_sort(t_stack *light, t_stack *dark, int group, int dir)
+bool	extreme_sort(t_stack *light, t_stack *dark, int group, int dir)
 {
 	dir = push_reference(light, dark, group);
 	if (light->group == A && count_group_size(light, dir) < 3)
@@ -76,15 +76,15 @@ int	extreme_sort(t_stack *light, t_stack *dark, int group, int dir)
 		if (light->next->group == light->prev->group)
 		{
 			if (dir == CW)
-				r_rotate(light, TRUE);
+				r_rotate(light, true);
 			else
-				rotate(light, TRUE);
+				rotate(light, true);
 		}
-		return (TRUE);
+		return (true);
 	}
 	else if (light->group == B && dark->next->group != light->next->group
 		&& dark->next->group != light->prev->group)
-		return (FALSE);
+		return (false);
 	else
 		return (extreme_sort(light, dark, group, dir));
 }
