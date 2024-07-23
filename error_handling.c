@@ -6,34 +6,12 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:52:30 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/22 18:53:44 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/23 14:50:06 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
-
-bool	is_integer(const char *nptr)
-{
-	int		sign;
-	long	result;
-
-	sign = 1;
-	if (*nptr == '-')
-		sign = -1;
-	if (*nptr == '-' || *nptr == '+')
-		nptr++;
-	result = 0;
-	while ('0' <= *nptr && *nptr <= '9')
-	{
-		result = result * 10 + (*nptr - '0');
-		if ((sign == 1 && INT_MAX < result)
-			|| (sign == -1 && result - 1 > INT_MAX))
-			return (false);
-		nptr++;
-	}
-	return (true);
-}
 
 bool	is_digit_str(char *str)
 {
@@ -44,6 +22,8 @@ bool	is_digit_str(char *str)
 	i = 0;
 	sign = 1;
 	result = 0;
+	if (*str == '-')
+		sign = -1;
 	if (*str == '-' || *str == '+')
 		str++;
 	if (*str == '\0')
@@ -52,7 +32,7 @@ bool	is_digit_str(char *str)
 	{
 		result = result * 10 + (*str - '0');
 		if ((sign == 1 && INT_MAX < result)
-			|| (sign == -1 && result - 1 > INT_MAX))
+			|| (sign == -1 && (result - 1) > INT_MAX))
 			return (false);
 		str++;
 	}

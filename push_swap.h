@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:56 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/22 18:24:58 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/22 19:04:02 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,10 @@
 # include <limits.h>
 # include <stdbool.h>
 
-// # define TRUE 1
-// # define FALSE 0
 # define CW 1
 # define CCW -1
 # define A -2
 # define B -3
-// # define STACK 5
-// # define GROUP 6
 
 typedef struct s_stack
 {

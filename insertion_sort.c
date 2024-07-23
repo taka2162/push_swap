@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 15:59:51 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/22 19:02:31 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/23 14:49:53 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,49 +29,61 @@ void	push_to_b(t_stack *light, t_stack *dark, t_pos pos)
 	push(light, dark);
 }
 
-void	push_to_a(t_stack *light, t_stack *dark, int group, bool flag)
+void	to_descending_form(t_stack *dark, int group)
 {
-	int		count;
+	int		cnt;
 	long	max;
 	t_stack	*target;
 
 	max = get_max(dark);
+	cnt = 0;
 	target = dark->next;
-	count = 0;
 	while (target->data != max)
 	{
-		count++;
+		cnt++;
 		target = target->next;
 	}
 	while (dark->prev->data > dark->next->data && dark->prev->group == group)
 	{
-		if (count_stack_size(dark) / 2 < count)
+		if (count_stack_size(dark) / 2 < cnt)
 			r_rotate(dark, true);
 		else
 			rotate(dark, true);
 	}
-	count = 3;
+}
+
+void	push_to_a(t_stack *light, t_stack *dark, int darkgroup, bool is_only)
+{
+	int	cnt;
+	int	group;
+
+	group = darkgroup;
+	group = dark->next->group;
+	to_descending_form(dark, group);
+	cnt = 3;
 	while (dark->next->group == group || light->prev->data < light->next->data)
 	{
-		if (flag == true && dark->next->data < light->prev->data && 0 < count)
+		if (is_only && dark->next->data < light->prev->data && 0 < cnt)
 		{
 			r_rotate(light, true);
-			count--;
+			cnt--;
 			continue ;
 		}
 		if (count_stack_size(dark) == 0)
 			break ;
 		push(dark, light);
 	}
-	while (flag == true && 0 < count--)
+	while (is_only && 0 < cnt--)
 		r_rotate(light, true);
 }
 
-void	initialize_group(t_stack *light, int group, int dir)
+void	set_for_insertion_form(t_stack *light, t_stack *dark, int group)
 {
 	t_stack	*target;
 	int		original;
+	int		dir;
 
+	dir = set_dir(light);
 	target = set_next_node(light, dir);
 	original = target->group;
 	while (target->group == original)
@@ -79,62 +91,35 @@ void	initialize_group(t_stack *light, int group, int dir)
 		target->group = group + 1;
 		target = set_next_node(target, dir);
 	}
-}
-
-void	sort_three_sort_group(t_stack *stack)
-{
-	long	first;
-	long	second;
-	long	third;
-
-	first = stack->next->data;
-	second = stack->next->next->data;
-	third = stack->next->next->next->data;
-	if (first > second && second > third)
-	{
-		swap(stack, true);
-		r_rotate(stack, true);
-	}
-	else if (first > second && third > second && first > third)
-		rotate(stack, true);
-	else if (first > second && third > second && third > first)
-		swap(stack, true);
-	else if (second > first && second > third && first > third)
-		r_rotate(stack, true);
-	else if (second > first && second > third && third > first)
-	{
-		r_rotate(stack, true);
-		swap(stack, true);
-	}
-}
-
-void	insertion_sort(t_stack *light, t_stack *dark, int group, bool flag)
-{
-	t_pos	pos;
-	int		dir;
-	int		dark_group;
-
-	dir = set_dir(light);
-	initialize_group(light, group, dir);
 	if (dir == CCW)
 	{
 		r_rotate(light, true);
 		r_rotate(light, true);
 	}
 	push(light, dark);
-	if (count_stack_size(light) > 3)
+	if (3 < count_stack_size(light))
 		push(light, dark);
 	if (dark->next->data < dark->next->next->data)
 		swap(dark, true);
+}
+
+void	insertion_sort(t_stack *light, t_stack *dark, int group, bool is_only)
+{
+	t_pos	pos;
+	int		dir;
+	int		dark_group;
+
+	dir = set_dir(light);
+	set_for_insertion_form(light, dark, group);
 	while (light->next->group == group + 1 || light->prev->group == group + 1)
 	{
-		if (flag == true && count_stack_size(light) <= 3)
+		if (is_only && count_stack_size(light) <= 3)
 			break ;
 		pos = choose_best_node(light, dark, 0, CW);
 		push_to_b(light, dark, pos);
 	}
-	if (flag == true && count_stack_size(light) <= 3)
+	if (is_only && count_stack_size(light) <= 3)
 		sort_three_nodes(light);
 	dark_group = set_next_node(dark, dir)->group;
-	push_to_a(light, dark, dark_group, flag);
+	push_to_a(light, dark, dark_group, is_only);
 }

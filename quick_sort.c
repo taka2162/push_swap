@@ -67,7 +67,7 @@ void	sort_one_or_two(t_stack *light, t_stack *dark, int size, int dir)
 	}
 }
 
-bool	sort_light(t_stack *light, t_stack *dark, int *group, int dir)
+bool	sort_by_algorithm(t_stack *light, t_stack *dark, int *group, int dir)
 {
 	bool	flag;
 	int		size;
@@ -97,7 +97,7 @@ void	quick_sort(t_stack *light, t_stack *dark, int group)
 	bool	flag;
 
 	dir = set_dir(light);
-	flag = sort_light(light, dark, &group, dir);
+	flag = sort_by_algorithm(light, dark, &group, dir);
 	if (light->next == light || dark->next == dark)
 		return ;
 	if (light->group == A)
