@@ -6,14 +6,14 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:52:30 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/23 14:50:06 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/23 15:29:43 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
 
-bool	is_digit_str(char *str)
+static bool	is_digit_str(char *str)
 {
 	int		i;
 	int		sign;
@@ -41,7 +41,7 @@ bool	is_digit_str(char *str)
 	return (true);
 }
 
-bool	is_duplicate(long value, t_stack *a)
+static bool	is_duplicate(long value, t_stack *a)
 {
 	t_stack	*target;
 
@@ -55,7 +55,7 @@ bool	is_duplicate(long value, t_stack *a)
 	return (false);
 }
 
-void	free_str(char **str)
+static void	free_str(char **str)
 {
 	int	i;
 

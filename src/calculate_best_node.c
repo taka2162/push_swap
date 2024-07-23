@@ -20,7 +20,7 @@ int	abs(int num)
 		return (num);
 }
 
-int	calculate_best_pos(t_stack *dark, long value)
+static int	calculate_best_pos(t_stack *dark, long value)
 {
 	int		pos;
 	int		dir;
@@ -49,7 +49,7 @@ int	calculate_best_pos(t_stack *dark, long value)
 	return (pos);
 }
 
-int	least_cost(int pos_a, int pos_b)
+static int	least_cost(int pos_a, int pos_b)
 {
 	int	min;
 	int	result;
@@ -64,7 +64,7 @@ int	least_cost(int pos_a, int pos_b)
 	return (result);
 }
 
-t_pos	set_pos(t_pos pos, int pos_b, int size, int cnt)
+static t_pos	set_pos(t_pos pos, int pos_b, int size, int cnt)
 {
 	int	pos_a;
 

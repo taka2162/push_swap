@@ -6,31 +6,31 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:45:28 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/23 14:44:37 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/23 15:36:40 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void	__print_stack(t_stack *stack)
-{
-	t_stack	*head;
+// void	__print_stack(t_stack *stack)
+// {
+// 	t_stack	*head;
 
-	head = stack;
-	stack = stack->next;
-	while (stack != head)
-	{
-		if (head->group == A)
-			printf("\x1b[35m");
-		else
-			printf("\x1b[36m");
-		printf("%ld\x1b[m-%d ", stack->data, stack->group);
-		stack = stack->next;
-	}
-	printf("\x1b[m");
-	printf("\n");
-}
+// 	head = stack;
+// 	stack = stack->next;
+// 	while (stack != head)
+// 	{
+// 		if (head->group == A)
+// 			printf("\x1b[35m");
+// 		else
+// 			printf("\x1b[36m");
+// 		printf("%ld\x1b[m-%d ", stack->data, stack->group);
+// 		stack = stack->next;
+// 	}
+// 	printf("\x1b[m");
+// 	printf("\n");
+// }
 
 void	error_exit(t_stack *a, t_stack *b)
 {
@@ -40,7 +40,7 @@ void	error_exit(t_stack *a, t_stack *b)
 	exit(1);
 }
 
-bool	is_sorted(t_stack *a)
+static bool	is_sorted(t_stack *a)
 {
 	t_stack	*target;
 
@@ -52,6 +52,14 @@ bool	is_sorted(t_stack *a)
 		target = target->next;
 	}
 	return (true);
+}
+
+void	sort_one_two_nodes(t_stack *stack)
+{
+	if (count_stack_size(stack) == 1)
+		return ;
+	if (stack->next->next->data < stack->next->data)
+		swap(stack, true);
 }
 
 void	sort_three_nodes(t_stack *stack)
@@ -94,7 +102,7 @@ int	main(int argc, char **argv)
 	if (is_sorted(a))
 		return (clear_stack(a), clear_stack(b), 0);
 	else if (count_stack_size(a) <= 2)
-		sort_one_or_two(a, b, count_stack_size(a), CW);
+		sort_one_two_nodes(a);
 	else if (count_stack_size(a) == 3)
 		sort_three_nodes(a);
 	else if (count_stack_size(a) <= 365)

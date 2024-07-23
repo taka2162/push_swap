@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-long	get_reference(t_stack *light)
+static long	get_reference(t_stack *light)
 {
 	if (light->group == A)
 		return (get_min(light));
@@ -20,7 +20,7 @@ long	get_reference(t_stack *light)
 		return (get_max(light));
 }
 
-int	calculate_dir(t_stack *light, long reference)
+static int	calculate_dir(t_stack *light, long reference)
 {
 	t_stack	*target;
 	int		cnt;
@@ -42,7 +42,7 @@ int	calculate_dir(t_stack *light, long reference)
 		return (CCW);
 }
 
-int	push_reference(t_stack *light, t_stack *dark, int group)
+static int	push_reference(t_stack *light, t_stack *dark, int group)
 {
 	int		size;
 	long	reference;

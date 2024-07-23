@@ -6,13 +6,13 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 15:59:51 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/23 14:49:53 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/23 15:40:13 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_to_b(t_stack *light, t_stack *dark, t_pos pos)
+static void	push_to_b(t_stack *light, t_stack *dark, t_pos pos)
 {
 	while (0 < pos.a && 0 < pos.b && 0 < (pos.a--) * (pos.b--))
 		rr(light, dark);
@@ -29,7 +29,7 @@ void	push_to_b(t_stack *light, t_stack *dark, t_pos pos)
 	push(light, dark);
 }
 
-void	to_descending_form(t_stack *dark, int group)
+static void	to_descending_form(t_stack *dark, int group)
 {
 	int		cnt;
 	long	max;
@@ -52,12 +52,11 @@ void	to_descending_form(t_stack *dark, int group)
 	}
 }
 
-void	push_to_a(t_stack *light, t_stack *dark, int darkgroup, bool is_only)
+static void	push_to_a(t_stack *light, t_stack *dark, bool is_only)
 {
 	int	cnt;
 	int	group;
 
-	group = darkgroup;
 	group = dark->next->group;
 	to_descending_form(dark, group);
 	cnt = 3;
@@ -77,7 +76,7 @@ void	push_to_a(t_stack *light, t_stack *dark, int darkgroup, bool is_only)
 		r_rotate(light, true);
 }
 
-void	set_for_insertion_form(t_stack *light, t_stack *dark, int group)
+static void	set_for_insertion_form(t_stack *light, t_stack *dark, int group)
 {
 	t_stack	*target;
 	int		original;
@@ -106,10 +105,7 @@ void	set_for_insertion_form(t_stack *light, t_stack *dark, int group)
 void	insertion_sort(t_stack *light, t_stack *dark, int group, bool is_only)
 {
 	t_pos	pos;
-	int		dir;
-	int		dark_group;
 
-	dir = set_dir(light);
 	set_for_insertion_form(light, dark, group);
 	while (light->next->group == group + 1 || light->prev->group == group + 1)
 	{
@@ -120,6 +116,5 @@ void	insertion_sort(t_stack *light, t_stack *dark, int group, bool is_only)
 	}
 	if (is_only && count_stack_size(light) <= 3)
 		sort_three_nodes(light);
-	dark_group = set_next_node(dark, dir)->group;
-	push_to_a(light, dark, dark_group, is_only);
+	push_to_a(light, dark, is_only);
 }

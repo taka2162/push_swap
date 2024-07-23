@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	push_to_dark(t_stack **light, t_stack *dark, int group, int dir)
+static void	push_to_dark(t_stack **light, t_stack *dark, int group, int dir)
 {
 	set_next_node(*light, dir)->group = group + 1;
 	if (dir == CCW)
@@ -20,7 +20,7 @@ void	push_to_dark(t_stack **light, t_stack *dark, int group, int dir)
 	push(*light, dark);
 }
 
-void	divide_group(t_stack *light, t_stack *dark, int group, int dir)
+static void	divide_group(t_stack *light, t_stack *dark, int group, int dir)
 {
 	t_stack	*target;
 	long	median;
@@ -46,7 +46,7 @@ void	divide_group(t_stack *light, t_stack *dark, int group, int dir)
 	}
 }
 
-void	sort_one_or_two(t_stack *light, t_stack *dark, int size, int dir)
+static void	sort_one_or_two(t_stack *light, t_stack *dark, int size, int dir)
 {
 	if (dir == CCW)
 	{
@@ -67,7 +67,7 @@ void	sort_one_or_two(t_stack *light, t_stack *dark, int size, int dir)
 	}
 }
 
-bool	sort_by_algorithm(t_stack *light, t_stack *dark, int *group, int dir)
+static bool	sorting_method(t_stack *light, t_stack *dark, int *group, int dir)
 {
 	bool	flag;
 	int		size;
@@ -97,7 +97,7 @@ void	quick_sort(t_stack *light, t_stack *dark, int group)
 	bool	flag;
 
 	dir = set_dir(light);
-	flag = sort_by_algorithm(light, dark, &group, dir);
+	flag = sorting_method(light, dark, &group, dir);
 	if (light->next == light || dark->next == dark)
 		return ;
 	if (light->group == A)
