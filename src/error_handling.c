@@ -6,12 +6,12 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 14:52:30 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/23 15:29:43 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/25 15:26:28 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h"
+#include "../include/push_swap.h"
+#include "../libft/libft.h"
 
 static bool	is_digit_str(char *str)
 {

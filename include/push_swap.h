@@ -6,7 +6,7 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:56 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/23 15:25:41 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/25 15:27:28 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	rrr(t_stack *a, t_stack *b);
 int		count_stack_size(t_stack *stack);
 int		count_group_size(t_stack *light, int dir);
 
-void	sort_one_or_two(t_stack *light, t_stack *dark, int size, int dir);
 void	sort_three_nodes(t_stack *a);
 
 long	get_median(t_stack *stack, int dir);

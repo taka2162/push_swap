@@ -6,11 +6,11 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 16:03:45 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/22 16:12:58 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/25 15:25:26 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 void	initialize_stack(t_stack **a, t_stack **b)
 {

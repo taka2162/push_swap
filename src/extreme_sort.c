@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extreme_sort.c                                   :+:      :+:    :+:   */
+/*   extreme_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 17:54:42 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/02 15:50:10 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/25 15:24:40 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 static long	get_reference(t_stack *light)
 {

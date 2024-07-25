@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   compression.c                                      :+:      :+:    :+:   */
+/*   quick_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 17:55:15 by ttakino           #+#    #+#             */
-/*   Updated: 2024/06/19 17:55:20 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/25 15:22:00 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 static void	push_to_dark(t_stack **light, t_stack *dark, int group, int dir)
 {

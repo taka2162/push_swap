@@ -6,12 +6,12 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:00:11 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/22 15:48:18 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/25 15:25:58 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h" 
+#include "../include/push_swap.h"
+#include "../libft/libft.h" 
 
 void	swap(t_stack *stack, bool show_motion)
 {

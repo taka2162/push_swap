@@ -6,11 +6,11 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 15:59:51 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/23 15:40:13 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/25 15:26:18 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 static void	push_to_b(t_stack *light, t_stack *dark, t_pos pos)
 {

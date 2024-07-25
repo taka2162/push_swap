@@ -6,12 +6,12 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:45:28 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/23 15:36:40 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/25 15:26:10 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h"
+#include "../include/push_swap.h"
+#include "../libft/libft.h"
 
 // void	__print_stack(t_stack *stack)
 // {

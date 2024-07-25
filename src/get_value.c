@@ -6,11 +6,11 @@
 /*   By: ttakino <ttakino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:37:31 by ttakino           #+#    #+#             */
-/*   Updated: 2024/07/16 16:49:54 by ttakino          ###   ########.fr       */
+/*   Updated: 2024/07/25 15:24:47 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
 long	get_min(t_stack *light)
 {
